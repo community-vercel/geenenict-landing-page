@@ -47,14 +47,14 @@ export default function Home() {
       
       {/* Name and Subtitle */}
       <h2 className="text-xl md:text-2xl font-semibold text-orange-500 mt-24">
-        Hi, I’m Frans Geenen.
+        Hi, I am Frans Geenen.
       </h2>
       <p className="italic text-gray-600">Nice to meet you!</p>
     </section>
     <section className="bg-[#3D4A46]  text-white py-12">
       <div className="container mx-auto  text-center">
         <p className="max-w-3xl mx-auto text-white text-lg leading-relaxed">
-          As a Splunk specialist and web developer with 12+ years of experience, I’ve worked on diverse projects for agencies, startups, and clients. I’m skilled in unlocking data insights using Splunk and creating captivating websites and e-commerce solutions. Automation and integrations are my forte, streamlining workflows for improved efficiency. My quiet confidence and curiosity drive me to seek innovative design solutions. I’m constantly improving my skills to deliver tailored products that exceed expectations.
+          As a Splunk specialist and web developer with 12+ years of experience, I have worked on diverse projects for agencies, startups, and clients. I am skilled in unlocking data insights using Splunk and creating captivating websites and e-commerce solutions. Automation and integrations are my forte, streamlining workflows for improved efficiency. My quiet confidence and curiosity drive me to seek innovative design solutions. I am constantly improving my skills to deliver tailored products that exceed expectations.
         </p>
       </div>
       </section>
@@ -68,7 +68,7 @@ export default function Home() {
               Splunk
             </h3>
             <p className="mt-4 max-w-xs mx-auto text-gray-600">
-              Over the past 12 years, I’ve been working with Splunk Core Enterprise, Splunk IT Service Intelligence, Splunk Enterprise Security, and many more Splunk products like AR, TV, Mobile, Add-on Builder, Dashboard Studio, HEC, etc.
+              Over the past 12 years, I have been working with Splunk Core Enterprise, Splunk IT Service Intelligence, Splunk Enterprise Security, and many more Splunk products like AR, TV, Mobile, Add-on Builder, Dashboard Studio, HEC, etc.
             </p>
           </div>
 
@@ -128,8 +128,8 @@ export default function Home() {
   <p className="max-w-3xl text-lg leading-relaxed mt-6 text-white font-light">
     Below you can find a concise overview of the most recent projects I have
     completed. This ranges from Splunk projects to building websites and eCommerce solutions.
-    Don’t hesitate to reach out so we can see how I can help your company. 
-    I’m looking forward to hearing about your company's project!
+    Dont hesitate to reach out so we can see how I can help your company. 
+    I am looking forward to hearing about your company's project!
   </p>
 </div>
       </div>
