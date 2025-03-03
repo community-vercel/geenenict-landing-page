@@ -129,7 +129,7 @@ export default function Home() {
     Below you can find a concise overview of the most recent projects I have
     completed. This ranges from Splunk projects to building websites and eCommerce solutions.
     Dont hesitate to reach out so we can see how I can help your company. 
-    I am looking forward to hearing about your company's project!
+    I am looking forward to hearing about your companys project!
   </p>
 </div>
       </div>
