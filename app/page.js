@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div >
      <header  className="bg-gradient-to-b from-gray-300 to-white py-4 px-6 flex items-center justify-between flex-wrap">
   {/* Logo */}
   <div className="flex items-center gap-2">
@@ -134,8 +134,8 @@ export default function Home() {
             <p className="max-w-3xl text-lg leading-relaxed mt-6 text-white font-light">
               Below you can find a concise overview of the most recent projects I have
               completed. This ranges from Splunk projects to building websites and eCommerce solutions.
-              Don't hesitate to reach out so we can see how I can help your company. 
-              I am looking forward to hearing about your company's project!
+              Dont hesitate to reach out so we can see how I can help your company. 
+              I am looking forward to hearing about your companys project!
             </p>
           </div>
         </div>
