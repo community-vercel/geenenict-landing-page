@@ -203,6 +203,7 @@ export default function Home() {
     </li>
   </ul>
 
+
 </div>
 </section>
       <section className="py-8 bg-gradient-to-b from-[#2C3E50] to-[#34495E] mt-6">
