@@ -76,7 +76,7 @@ export default function Home() {
     <div className="bg-gray-700 bg-opacity-50 p-6 rounded-lg shadow-md border-l-4 border-orange-500">
       <h3 className="text-2xl font-semibold text-white mb-3">Who am I?</h3>
       <p className="text-gray-300">
-        I am <span className="font-bold text-orange-400">Brayner Daal</span>, an experienced and certified IT professional and security consultant. I've collaborated with large and medium-sized companies across finance, healthcare, and technology sectors. My focus is on designing, implementing, and managing <span className="text-orange-400">secure and efficient IT infrastructures.</span>
+        I am <span className="font-bold text-orange-400">Brayner Daal</span>an experienced and certified IT professional and security consultant. I have collaborated with large and medium-sized companies across finance, healthcare, and technology sectors. My focus is on designing, implementing, and managing <span className="text-orange-400">secure and efficient IT infrastructures.</span>
       </p>
     </div>
 
