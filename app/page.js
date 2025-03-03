@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className={styles.container}>
-     <header className="bg-gradient-to-b from-gray-300 to-white py-4 px-6 flex items-center justify-between flex-wrap">
+     <header  className="bg-gradient-to-b from-gray-300 to-white py-4 px-6 flex items-center justify-between flex-wrap">
   {/* Logo */}
   <div className="flex items-center gap-2">
     <Image 
@@ -20,12 +20,11 @@ export default function Home() {
   {/* Contact Button */}
   <a 
     href="#contact" 
-    className="bg-orange-500 text-white text-sm font-semibold px-5 py-2 rounded-md shadow-md hover:bg-orange-600 transition mt-4 md:mt-0 ml-auto md:ml-0"
+    className="bg-orange-500 text-white text-sm font-semibold px-5 py-2 rounded-md shadow-md hover:bg-orange-600 transition mt-4 md:mt-0 mx-auto md:ml-auto md:mr-0"
   >
     GET IN TOUCH
   </a>
 </header>
-
       <section className="flex flex-col items-center text-center py-24 bg-gradient-to-b from-gray-300 to-white">
         {/* Title */}
         <h1 className="text-lg lg:text-5xl md:text-5xl sm:text-xl font-semibold text-gray-600 mt-10 w-[300px] lg:w-[900px]  leading-normal text-center">
@@ -165,19 +164,19 @@ export default function Home() {
           <form className="mt-8">
             {/* Name Fields */}
             <div className="text-left mb-5">
-              <label className="text-gray-700 text-sm font-semibold">Name <span className="text-gray-500 text-xs">(required)</span></label>
-              <div className="flex gap-4 mt-1 flex-wrap">
-                <input 
-                  type="text" 
-                  className="w-full sm:w-1/2 px-4 py-2 border border-gray-400 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-orange-500"
-                />
-
-                <input 
-                  type="text" 
-                  className="w-full sm:w-1/2 px-4 py-2 border border-gray-400 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-orange-500"
-                />
-              </div>
+            <label className="text-gray-700 text-sm font-semibold">Name <span className="text-gray-500 text-xs">(required)</span></label>
+            <div className="flex gap-4 mt-1">
+              <input 
+                type="text" 
+                className="w-1/2 px-4 py-2 border border-gray-400 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+              
+              <input 
+                type="text" 
+                className="w-1/2 px-4 py-2 border border-gray-400 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
             </div>
+          </div>
 
             {/* Email */}
             <div className="text-left mb-5">
