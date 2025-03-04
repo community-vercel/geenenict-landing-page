@@ -108,7 +108,6 @@ const NavbarPage = () => {
         console.log("image url",`${import.meta.env.VITE_BASE_URL_IMG}uploads${item.logo}`)
       }
   };
-  
 
   // Handle Delete button click
   const handleDelete = async (id)=> {
