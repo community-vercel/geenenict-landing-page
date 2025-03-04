@@ -132,10 +132,7 @@ export default function Home({homeDetail}) {
   }
   
   </span>
-
-  
     }
-  
 </div> 
 
 
