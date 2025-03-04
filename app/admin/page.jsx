@@ -30,7 +30,7 @@ const Login = () => {
       setTimeout(() => {
         router.push("/admin/dashboard");
         // navigate("/admin/dashboard");
-      }, 1500);
+      }, 200);
       
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Try again.");
