@@ -259,7 +259,7 @@ export default function Home({ homeDetail }) {
                     {/* Recent Projects Title */}
                     <div className="text-white  ">
                         <H2 className="text-3xl lg:text-4xl md:text-5xl sm:text:2xl xs:tex font-extrabold tracking-tight text-center mb-0 lg:mb-10">
-                            My recent <span className="text-orange-500">Projects</span>
+                            My Recent <span className="text-orange-500">Projects</span>
                         </H2>
                     </div>
 
@@ -267,9 +267,9 @@ export default function Home({ homeDetail }) {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 sm:mt-5 px-6">
 
                         {homeDetail?.allproject.map((project, index) => (
-                            <div key={index} className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-[#1E2A33] p-6 bg-white rounded-lg text-black">
+                            <div key={index} className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-[#1E2A33] hover:text-white p-6 bg-white rounded-lg text-black">
                                 <strong className="text-lg text-orange-500"> {project.title}</strong>
-                                <p className="mt-2 text-gray-600">{project.description}</p>
+                                <p className="mt-2 hover:text-white  text-gray-600">{project.description}</p>
                             </div>
                         ))}
 
@@ -408,7 +408,7 @@ export default function Home({ homeDetail }) {
                             }</strong></p>
                             <p>📧 Email: <Link href={`mailto:${homeDetail?.footer.data.email}`} className="text-orange-400 hover:underline">{homeDetail?.footer.data.email}</Link></p>
                             <p>📞 Phone: <Link href={`tel:${homeDetail?.footer.data.phone}`} className="text-orange-400 hover:underline">{homeDetail?.footer.data.phone}</Link></p>
-                            <p>🌍 LinkedIn: <Link href={`mailto:${homeDetail?.footer.data.linkedin}`} target="_blank" className="text-orange-400 hover:underline">{homeDetail?.footer.data.linkedin}</Link></p>
+                            <p>🌍 LinkedIn: <Link href={`${homeDetail?.footer.data.linkedin}`} target="_blank" className="text-orange-400 hover:underline">{homeDetail?.footer.data.linkedin}</Link></p>
                         </div>
 
                         {/* Social Icons */}
