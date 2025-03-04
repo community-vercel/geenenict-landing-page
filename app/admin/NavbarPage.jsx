@@ -36,8 +36,7 @@ const NavbarPage = () => {
   };
 
 
-
-
+  
   // Handle file selection
   const handleFileChange = (e) => {
     const file = e.target.files[0];
