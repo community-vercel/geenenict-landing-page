@@ -124,6 +124,7 @@ const NavbarPage = () => {
     }
   };
 
+  
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-gray-100 p-4">
       <div className="p-6 rounded-lg w-full px-24">
