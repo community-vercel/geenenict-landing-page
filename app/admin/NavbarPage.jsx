@@ -38,7 +38,7 @@ const NavbarPage = () => {
   
 
 
-  
+
   // Handle file selection
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -143,9 +143,12 @@ const NavbarPage = () => {
               onChange={handleFileChange}
               className="w-full border rounded-md px-3 py-2"
             />
-            {logoPreview && (
-              <img src={logoPreview} alt="Logo Preview" className="w-20 h-20 mt-2 rounded-md object-contain" />
-            )}
+            {logo && logo? (
+              <img src={logoPreviews} alt="Logo Preview" className="w-20 h-20 mt-2 rounded-md object-contain" />
+            ):(
+              navbarItems[0].image && (
+              <img src={logoPreviews} alt="Logo Preview" className="w-20 h-20 mt-2 rounded-md object-contain" />
+            ))}
           </div>
 
           {/* Logo Text */}
