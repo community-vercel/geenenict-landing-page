@@ -38,13 +38,11 @@ const NavbarPage = () => {
   
 
 
-
   // Handle file selection
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setLogo(file);
     setLogoPreviews(URL.createObjectURL(file)); // Preview selected file
-
     setLogoPreview(URL.createObjectURL(file)); // Preview selected file
   };
 
