@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import React, { useEffect, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { toast, ToastContainer } from "react-toastify";
@@ -15,18 +15,20 @@ const HeroAndAbout = () => {
   const [expertise, setExpertise] = useState("");
   const [description, setDescription] = useState("");
   const [editingId, setEditingId] = useState(null);
+const [logoPreview, setLogoPreview] = useState(""); // Store preview URL
+  const [logoPreviews, setLogoPreviews] = useState(""); // Store preview URL
 
   useEffect(() => {
     fetchData();
   }, []);
 
+  const serverurrlss = process.env.NEXT_PUBLIC_FRONT_URL;
   // Fetch all data
   const fetchData = async () => {
-    console.log("Fetching data...");
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}herosection/getAll`);
       const result = await response.json();
-      console.log("Fetched Data:", result);
+      console.log("response....",result[0])
       if (response.ok) {
         setData(result);
       } else {
@@ -36,7 +38,7 @@ const HeroAndAbout = () => {
       toast.error("Error fetching data!");
     }
   };
-  
+
   // Handle file upload
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -51,7 +53,7 @@ const HeroAndAbout = () => {
       toast.error("All fields are required!");
       return;
     }
-  
+
     const formData = new FormData();
     formData.append("header", header);
     formData.append("title", title);
@@ -60,27 +62,23 @@ const HeroAndAbout = () => {
     formData.append("description", description);
     formData.append("whoIAm", whoIAm);
     formData.append("expertise", expertise);
-  
     if (selectedFile) {
       formData.append("image", selectedFile);
     }
-  
+
     try {
       const url = editingId
-      
         ? `${process.env.NEXT_PUBLIC_FRONT_URL}herosection/update/${editingId}`
         : `${process.env.NEXT_PUBLIC_FRONT_URL}herosection/post`;
-  
+
       const method = editingId ? "PUT" : "POST";
-  
+
       const response = await fetch(url, {
         method,
-        body: formData, 
+        body: formData,
       });
-  
+
       const result = await response.json();
-      console.log("Server Response:", result); 
-  
       if (response.ok) {
         toast.success(editingId ? "Updated successfully!" : "Added successfully!");
         fetchData();
@@ -89,15 +87,12 @@ const HeroAndAbout = () => {
         toast.error(result.message || "Operation failed!");
       }
     } catch (error) {
-      console.error("Error submitting data:", error);
       toast.error("Error submitting data!");
     }
   };
-  
-  
 
   // Delete a record
-  const handleDelete = async (id)=> {
+  const handleDelete = async (id) => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}herosection/delete/${id}`, {
         method: "DELETE",
@@ -118,17 +113,16 @@ const HeroAndAbout = () => {
   // Edit a record
   const handleEdit = (item) => {
     setEditingId(item._id);
-    setHeader(item.header || "");
-    setTitle(item.title || "");
-    setSubtitle(item.subtitle || "");
-    setSubsubtitle(item.subsubtitle || "");
-    setWhoIAm(item.whoIAm || "");
-    setExpertise(item.expertise || "");
-    setDescription(item.description || "");
-    setSelectedFile(null); // Reset file selection for update
+    setHeader(item.header);
+    setTitle(item.title);
+    setSubtitle(item.subtitle);
+    setSubsubtitle(item.subsubtitle);
+    setWhoIAm(item.whoIAm);
+    setExpertise(item.expertise);
+    setDescription(item.description);
     window.scrollTo({ top: 0, behavior: "smooth" });
+
   };
-  
 
   // Reset form
   const resetForm = () => {
@@ -147,41 +141,41 @@ const HeroAndAbout = () => {
     <div className="flex flex-col justify-start mx-64 space-y-4">
       <h2 className="text-xl font-bold">Hero & About Section</h2>
 
-      {/ TinyMCE Editor /}
+      {/* TinyMCE Editor */}
       <Editor
-        apiKey={import.meta.env.VITE_TEXT_EDITOR_API_KEY}
+        apiKey={process.env.NEXT_PUBLIC_API_KEY}
         init={{ placeholder: "Enter Your Title here..." }}
         onEditorChange={(newValue) => setTitle(newValue)}
         value={title}
       />
 
-      {/ File Upload /}
+      {/* File Upload */}
       <div>
         <label className="block text-gray-700 font-bold mb-2 text-start">Upload an Image:</label>
         <input type="file" accept="image/*" onChange={handleFileUpload} className="border rounded p-2 w-full" />
         {selectedFile && <p className="mt-2 text-gray-600">Image selected: {selectedFile.name}</p>}
       </div>
 
-      {/ Input Fields /}
+      {/* Input Fields */}
       <input type="text" value={subtitle} onChange={(e) => setSubtitle(e.target.value)} placeholder="Welcome to Digidaal
 " className="border rounded p-2 w-full" />
       <input type="text" value={subsubtitle} onChange={(e) => setSubsubtitle(e.target.value)} placeholder="Nice to meet you!
 
 " className="border rounded p-2 w-full" />
       <input type="text" value={header} onChange={(e) => setHeader(e.target.value)} placeholder="About me" className="border rounded p-2 w-full" />
-      <Editor apiKey={import.meta.env.VITE_TEXT_EDITOR_API_KEY} init={{ placeholder: "Description..." }} onEditorChange={(newValue) => setDescription(newValue)} value={description} />
+      <Editor apiKey={process.env.NEXT_PUBLIC_API_KEY} init={{ placeholder: "Description..." }} onEditorChange={(newValue) => setDescription(newValue)} value={description} />
 
 
-      {/ Text Editors /}
-      <Editor apiKey={import.meta.env.VITE_TEXT_EDITOR_API_KEY} init={{ placeholder: "Who I am..." }} onEditorChange={(newValue) => setWhoIAm(newValue)} value={whoIAm} />
-      <Editor apiKey={import.meta.env.VITE_TEXT_EDITOR_API_KEY} init={{ placeholder: "Key Expertise..." }} onEditorChange={(newValue) => setExpertise(newValue)} value={expertise} />
+      {/* Text Editors */}
+      <Editor apiKey={process.env.NEXT_PUBLIC_API_KEY} init={{ placeholder: "Who I am..." }} onEditorChange={(newValue) => setWhoIAm(newValue)} value={whoIAm} />
+      <Editor apiKey={process.env.NEXT_PUBLIC_API_KEY} init={{ placeholder: "Key Expertise..." }} onEditorChange={(newValue) => setExpertise(newValue)} value={expertise} />
 
-      {/ Submit Button /}
+      {/* Submit Button */}
       <button onClick={handleSubmit} className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
         {editingId ? "Update" : "Submit"}
       </button>
 
-      {/ Display Data /}
+      {/* Display Data */}
       <h2 className="text-lg font-bold mt-6">Saved Data</h2>
       <div className="space-y-4">
         {data.length > 0 ? (
@@ -207,8 +201,10 @@ const HeroAndAbout = () => {
         )}
       </div>
 
-      {/ Toast Container /}
+      {/* Toast Container */}
       <ToastContainer />
     </div>
   );
 };
+
+export default HeroAndAbout;

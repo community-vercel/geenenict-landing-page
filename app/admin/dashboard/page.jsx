@@ -143,11 +143,11 @@ const handleLogout = () => {
           </div>
         </header>
 
+
         {/* Dynamic Content Rendering */}
         <main className="flex-1 p-6">{pageContent[selectedPage]}</main>
       </div>
     </div>
   );
 };
-
 export default Dashboard;
