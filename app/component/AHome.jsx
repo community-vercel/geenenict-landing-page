@@ -140,6 +140,7 @@ export default function Home({homeDetail}) {
 
 
 
+
   <Link
     href="#contact" 
     className="bg-orange-500 text-white text-sm font-semibold px-5 py-3 rounded-md shadow-md hover:bg-orange-600 transition mt-3 xs:mt-5 sm:mt-4 lg:mt-0 md:mt-0 mx-auto md:ml-auto md:mr-0 "

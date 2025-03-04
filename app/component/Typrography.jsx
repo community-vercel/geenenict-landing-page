@@ -26,6 +26,7 @@ export const H2 = ({ children, className, ellipsis, textTransform, ...props }) =
   </h2>
 );
 
+
 export const H3 = ({ children, className, ellipsis, textTransform, ...props }) => (
   <h3
     className={clsx("h3", className, {
