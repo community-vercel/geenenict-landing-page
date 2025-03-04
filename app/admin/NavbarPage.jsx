@@ -36,6 +36,7 @@ const NavbarPage = () => {
   };
 
   
+  
 
 
   // Handle file selection
