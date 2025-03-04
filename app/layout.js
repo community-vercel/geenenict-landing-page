@@ -19,7 +19,6 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-                <link rel="preload" href="/brayner_daal.jpeg" as="image" />
 
         {children}
       </body>

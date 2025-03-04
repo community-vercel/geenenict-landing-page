@@ -137,7 +137,7 @@ export default function Home({ homeDetail }) {
                     </div>
 
                     <Link
-                        href="#contact"
+                        href="#contactss"
                         className="bg-orange-500 text-white text-sm font-semibold px-5 py-3 rounded-md shadow-md hover:bg-orange-600 transition mt-3 xs:mt-5 sm:mt-4 lg:mt-0 md:mt-0 mx-auto md:ml-auto md:mr-0 "
                     >
                         {homeDetail?.homeDetail[0].buttonText}
@@ -267,10 +267,10 @@ export default function Home({ homeDetail }) {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 sm:mt-5 px-6">
 
                         {homeDetail?.allproject.map((project, index) => (
-                            <div key={index} className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-[#1E2A33] hover:text-white p-6 bg-white rounded-lg text-black">
-                                <strong className="text-lg text-orange-500"> {project.title}</strong>
-                                <p className="mt-2 hover:text-white  text-gray-600">{project.description}</p>
-                            </div>
+                        <div key={index} className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-[#1E2A33] hover:text-white p-6 bg-white rounded-lg ">
+                        <strong className="text-lg text-orange-500"> {project.title}</strong>
+                        <p className="mt-2 text-white-500 hover:text-white">{project.description}</p>
+                      </div>
                         ))}
 
                     </div>
@@ -304,7 +304,7 @@ export default function Home({ homeDetail }) {
                         </h2>
 
                         {/* Form */}
-                        <form onSubmit={handleSubmit} className="mt-8">
+                        <form onSubmit={handleSubmit} className="mt-8" id="contactss">
                             {/* Name Fields */}
                             <div className="text-left mb-5">
                                 <label className="text-gray-700 text-sm font-semibold">

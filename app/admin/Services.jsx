@@ -148,6 +148,7 @@ const Services = () => {
       <div className="overflow-x-auto">
         <table className="w-full border-collapse border border-gray-300">
           <thead>
+            
             <tr className="bg-gray-200">
               <th className="border border-gray-300 p-2">Title</th>
               <th className="border border-gray-300 p-2">Description</th>
