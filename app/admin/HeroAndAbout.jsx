@@ -24,7 +24,7 @@ const HeroAndAbout = () => {
   const fetchData = async () => {
     console.log("Fetching data...");
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}herosection/getAll`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}herosection/getAll`);
       const result = await response.json();
       console.log("Fetched Data:", result);
       if (response.ok) {
@@ -68,8 +68,8 @@ const HeroAndAbout = () => {
     try {
       const url = editingId
       
-        ? `${import.meta.env.VITE_BASE_URL}herosection/update/${editingId}`
-        : `${import.meta.env.VITE_BASE_URL}herosection/post`;
+        ? `${process.env.NEXT_PUBLIC_FRONT_URL}herosection/update/${editingId}`
+        : `${process.env.NEXT_PUBLIC_FRONT_URL}herosection/post`;
   
       const method = editingId ? "PUT" : "POST";
   
@@ -99,7 +99,7 @@ const HeroAndAbout = () => {
   // Delete a record
   const handleDelete = async (id)=> {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}herosection/delete/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}herosection/delete/${id}`, {
         method: "DELETE",
       });
 

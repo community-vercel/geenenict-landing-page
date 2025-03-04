@@ -21,7 +21,7 @@ const NavbarPage = () => {
   // Fetch navbar details
   const fetchNavbarItems = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}navbar/getAll`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}navbar/getAll`);
       const data = await response.json();
       console.log("data",data)
       setNavbarItems(data);
@@ -30,9 +30,9 @@ const NavbarPage = () => {
         // Set the first item as default values
         setLogoText(data[0].logoText);
         setButtonText(data[0].buttonText);
-        setLogoPreview(`${import.meta.env.VITE_BASE_URL_IMG}${data[0].logo}`);
+        setLogoPreview(`${process.env.NEXT_PUBLIC_FRONT_URL_IMG}${data[0].logo}`);
         {
-            console.log("....",`${import.meta.env.VITE_BASE_URL_IMG}${data.logo}`)
+            console.log("....",`${process.env.NEXT_PUBLIC_FRONT_URL_IMG}${data.logo}`)
         }
       }
     } catch (error) {
@@ -65,12 +65,12 @@ const NavbarPage = () => {
     try {
       let response;
       if (editingId) {
-        response = await fetch(`${import.meta.env.VITE_BASE_URL}navbar/update/${editingId}`, {
+        response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}navbar/update/${editingId}`, {
           method: "PUT",
           body: formData,
         });
       } else {
-        response = await fetch(`${import.meta.env.VITE_BASE_URL}navbar/post`, {
+        response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}navbar/post`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: formData,
@@ -103,16 +103,16 @@ const NavbarPage = () => {
     setButtonText(item.buttonText);
     window.scrollTo({ top: 0, behavior: "smooth" });
 
-    setLogoPreview(`${import.meta.env.VITE_BASE_URL_IMG}${item.logo}`); // Show existing logo
+    setLogoPreview(`${process.env.NEXT_PUBLIC_FRONT_URL}${item.logo}`); // Show existing logo
     {
-        console.log("image url",`${import.meta.env.VITE_BASE_URL_IMG}uploads${item.logo}`)
+        console.log("image url",`${process.env.NEXT_PUBLIC_FRONT_URL}uploads${item.logo}`)
       }
   };
 
   // Handle Delete button click
   const handleDelete = async (id)=> {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}navbar/delete/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}navbar/delete/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -199,7 +199,7 @@ const NavbarPage = () => {
             <div key={item._id} className="bg-white p-4 rounded-lg shadow-md mb-4">
               <p className="font-medium text-gray-700">Logo Text: {item.logoText}</p>
               <p className="text-gray-600">Button Text: {item.buttonText}</p>
-              {item.image?              <img src={`${import.meta.env.VITE_BASE_URL_IMG}${item.logo}`} alt="Navbar Image" className="w-20 h-20 object-contain" />
+              {item.image?              <img src={`${process.env.NEXT_PUBLIC_FRONT_URL_IMG}${item.logo}`} alt="Navbar Image" className="w-20 h-20 object-contain" />
 
 :''
 }
