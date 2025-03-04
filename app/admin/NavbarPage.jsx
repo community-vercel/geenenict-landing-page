@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 const NavbarPage = () => {
   const [logo, setLogo] = useState(null);
   const [logoPreview, setLogoPreview] = useState(""); // Store preview URL
+  const [logoPreviews, setLogoPreviews] = useState(""); // Store preview URL
+
   const [logoText, setLogoText] = useState("");
   const [buttonText, setButtonText] = useState("");
   const [message, setMessage] = useState("");
@@ -19,15 +21,19 @@ const NavbarPage = () => {
   // Fetch navbar details
   const fetchNavbarItems = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}navbar/getAll`);
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}navbar/getAll`);
       const data = await response.json();
+      console.log("data",data)
       setNavbarItems(data);
   
       if (data.length > 0) {
         // Set the first item as default values
         setLogoText(data[0].logoText);
         setButtonText(data[0].buttonText);
-        setLogoPreview(`${process.env.NEXT_PUBLIC_IMG}${data[0].logo}`);
+        setLogoPreview(`${import.meta.env.VITE_BASE_URL_IMG}${data[0].logo}`);
+        {
+            console.log("....",`${import.meta.env.VITE_BASE_URL_IMG}${data.logo}`)
+        }
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -39,7 +45,7 @@ const NavbarPage = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setLogo(file);
-    setLogoPreview(URL.createObjectURL(file)); // Preview selected file
+    setLogoPreviews(URL.createObjectURL(file)); // Preview selected file
   };
 
   // Handle form submission (Add & Update)
@@ -59,13 +65,14 @@ const NavbarPage = () => {
     try {
       let response;
       if (editingId) {
-        response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}navbar/update/${editingId}`, {
+        response = await fetch(`${import.meta.env.VITE_BASE_URL}navbar/update/${editingId}`, {
           method: "PUT",
           body: formData,
         });
       } else {
-        response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}navbar/post`, {
+        response = await fetch(`${import.meta.env.VITE_BASE_URL}navbar/post`, {
           method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: formData,
         });
       }
@@ -96,17 +103,17 @@ const NavbarPage = () => {
     setButtonText(item.buttonText);
     window.scrollTo({ top: 0, behavior: "smooth" });
 
-    setLogoPreview(`${process.env.NEXT_PUBLIC_IMG}${item.logo}`); // Show existing logo
+    setLogoPreview(`${import.meta.env.VITE_BASE_URL_IMG}${item.logo}`); // Show existing logo
     {
-        console.log("image url",`${process.env.NEXT_PUBLIC_IMG}uploads${item.logo}`)
+        console.log("image url",`${import.meta.env.VITE_BASE_URL_IMG}uploads${item.logo}`)
       }
   };
   
 
   // Handle Delete button click
-  const handleDelete = async (id) => {
+  const handleDelete = async (id)=> {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}navbar/delete/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}navbar/delete/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -130,7 +137,7 @@ const NavbarPage = () => {
         {message && <p className="text-start text-red-500 mb-4">{message}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Logo Upload */}
+          {/ Logo Upload /}
           <div>
             <label className="block text-gray-700 font-medium text-start">Upload Logo</label>
             <input
@@ -139,12 +146,15 @@ const NavbarPage = () => {
               onChange={handleFileChange}
               className="w-full border rounded-md px-3 py-2"
             />
-            {logoPreview && (
-              <img src={logoPreview} alt="Logo Preview" className="w-20 h-20 mt-2 rounded-md object-contain" />
+            {logo && logo? (
+              <img src={logoPreviews} alt="Logo Preview" className="w-20 h-20 mt-2 rounded-md object-contain" />
+            ):navbarItems[0]?.image &&(
+                <img src={logoPreview} alt="Logo Preview" className="w-20 h-20 mt-2 rounded-md object-contain" />
+
             )}
           </div>
 
-          {/* Logo Text */}
+          {/ Logo Text /}
           <div>
             <label className="block text-gray-700 font-medium text-start">Logo Text</label>
             <input
@@ -157,7 +167,7 @@ const NavbarPage = () => {
             />
           </div>
 
-          {/* Button Text */}
+          {/ Button Text /}
           <div>
             <label className="block text-gray-700 font-medium text-start">Button Text</label>
             <input
@@ -170,7 +180,7 @@ const NavbarPage = () => {
             />
           </div>
 
-          {/* Submit Button */}
+          {/ Submit Button /}
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
@@ -180,7 +190,7 @@ const NavbarPage = () => {
         </form>
       </div>
 
-      {/* Display added navbar details */}
+      {/ Display added navbar details /}
       <div className="w-full mt-6 px-24">
         <h3 className="text-xl font-semibold text-start mb-2">Navbar Items</h3>
         {navbarItems.length === 0 ? (
@@ -190,7 +200,10 @@ const NavbarPage = () => {
             <div key={item._id} className="bg-white p-4 rounded-lg shadow-md mb-4">
               <p className="font-medium text-gray-700">Logo Text: {item.logoText}</p>
               <p className="text-gray-600">Button Text: {item.buttonText}</p>
-              <img src={`${process.env.NEXT_PUBLIC_IMG}${item.logo}`} alt="Navbar Image" className="w-20 h-20 object-contain" />
+              {item.image?              <img src={`${import.meta.env.VITE_BASE_URL_IMG}${item.logo}`} alt="Navbar Image" className="w-20 h-20 object-contain" />
+
+:''
+}
 
               <div className="flex justify-between mt-2">
                 <button
@@ -213,5 +226,6 @@ const NavbarPage = () => {
     </div>
   );
 };
+
 
 export default NavbarPage;
