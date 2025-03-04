@@ -11,7 +11,7 @@ const NavbarPage = () => {
   const [logoPreviews, setLogoPreviews] = useState(""); // Store preview URL
 
 
-  
+
   // Fetch navbar items on component mount
   useEffect(() => {
     fetchNavbarItems();
@@ -43,6 +43,8 @@ const NavbarPage = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     setLogo(file);
+    setLogoPreviews(URL.createObjectURL(file)); // Preview selected file
+
     setLogoPreview(URL.createObjectURL(file)); // Preview selected file
   };
 
