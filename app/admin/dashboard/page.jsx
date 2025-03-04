@@ -58,7 +58,7 @@ const handleLogout = () => {
     { name: "Footer", icon: <FaProjectDiagram /> },
     { name: "Contact", icon: <MdContactMail /> },
     { name: "Requests", icon: <MdContactMail /> },
-    { name: "SMTP Setup", icon: <MdContactMail /> },
+    // { name: "SMTP Setup", icon: <MdContactMail /> },
 
 
 
@@ -75,7 +75,7 @@ const handleLogout = () => {
     Projects: <ProjectLists/>,
     Footer: <Footer/>,
     Requests: <Requests/>,
-    "SMTP Setup": <p>hi</p>,
+    // "SMTP Setup": <p>hi</p>,
 
 
 
