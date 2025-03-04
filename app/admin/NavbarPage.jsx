@@ -131,6 +131,8 @@ const NavbarPage = () => {
           {editingId ? "Edit Navbar Details" : "Upload Navbar Details"}
         </h2>
 
+
+
         {message && <p className="text-start text-red-500 mb-4">{message}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
