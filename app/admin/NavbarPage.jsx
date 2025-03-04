@@ -146,7 +146,7 @@ const NavbarPage = () => {
             {logo && logo? (
               <img src={logoPreviews} alt="Logo Preview" className="w-20 h-20 mt-2 rounded-md object-contain" />
             ):(
-              navbarItems[0].image && (
+              navbarItems[0]?.image && (
               <img src={logoPreviews} alt="Logo Preview" className="w-20 h-20 mt-2 rounded-md object-contain" />
             ))}
           </div>
