@@ -67,6 +67,7 @@ const handleLogout = () => {
 
 
 
+  
   // Content for each menu item
   const pageContent = {
     Navbar: <NavbarPage/>,
