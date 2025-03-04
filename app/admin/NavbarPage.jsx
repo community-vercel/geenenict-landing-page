@@ -34,6 +34,8 @@ const NavbarPage = () => {
       console.error("Error fetching data:", error);
     }
   };
+
+  
   
 
   // Handle file selection
