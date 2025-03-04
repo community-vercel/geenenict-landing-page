@@ -10,7 +10,6 @@ const NavbarPage = () => {
   const [editingId, setEditingId] = useState(null);
   const [logoPreviews, setLogoPreviews] = useState(""); // Store preview URL
 
-  
 
   // Fetch navbar items on component mount
   useEffect(() => {
@@ -124,7 +123,7 @@ const NavbarPage = () => {
     }
   };
 
-  
+
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-gray-100 p-4">
       <div className="p-6 rounded-lg w-full px-24">
@@ -200,8 +199,10 @@ const NavbarPage = () => {
             <div key={item._id} className="bg-white p-4 rounded-lg shadow-md mb-4">
               <p className="font-medium text-gray-700">Logo Text: {item.logoText}</p>
               <p className="text-gray-600">Button Text: {item.buttonText}</p>
-              <img src={`${process.env.NEXT_PUBLIC_IMG}${item.logo}`} alt="Navbar Image" className="w-20 h-20 object-contain" />
+             {item.image?      <img src={`${process.env.NEXT_PUBLIC_IMG}${item.logo}`} alt="Navbar Image" className="w-20 h-20 object-contain" />
 
+              
+              :''}
               <div className="flex justify-between mt-2">
                 <button
                   onClick={() => handleEdit(item)}
