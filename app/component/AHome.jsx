@@ -218,12 +218,13 @@ export default function Home({ homeDetail }) {
                         {homeDetail?.services.data.map((service) => (
                             <div key={service._id} className="bg-gray-800  p-6 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
                                 <div className="text-orange-400 text-4xl mb-4">
-                                    <Image
+                                <img src={`data:image/png;base64,${service.image}`} alt="Hero Section"  className="w-12 h-12" />
+                                    {/* <Image
                                         src={serverurl.replace('/api/', '') + service.image} alt={service.title}
                                         width={20}
                                         height={20}
                                         priority
-                                        className="w-12 h-12" />
+                                        className="w-12 h-12" /> */}
                                     {/* <img src={serverurl.replace('api/','')+service.image} alt={service.title} className="w-12 h-12" /> */}
                                 </div>
                                 <h3 className="text-xl font-semibold text-orange-400">
@@ -243,7 +244,7 @@ export default function Home({ homeDetail }) {
                 {/* <hr className="h-px my-8 bg-red-500 border-0 dark:bg-gray-700" /> */}
                 <section className="bg-[#3D4A46] text-white py-8 mt-2 lg:mt-8">
 
-                    <div className="max-w-full w-full mx-auto text-center px-6 py-4 lg:py-14 bg-gradient-to-r from-[#2C3E50] to-[#34495E] rounded-lg shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+                    <div className="mx-auto text-center px-6 py-4 lg:py-14 bg-gradient-to-r from-[#2C3E50] to-[#34495E] rounded-lg shadow-lg ">
                         <div
 
                             dangerouslySetInnerHTML={{ __html: homeDetail?.workmethod[0].description }}
@@ -284,6 +285,8 @@ export default function Home({ homeDetail }) {
                         {/* Profile Image */}
                         <div className="relative mx-auto mb-4">
                             <div className="w-48 h-48 mx-auto rounded-full overflow-hidden">
+                            {/* <img src={`data:image/png;base64,${homeDetail?.contact[0].image}`} alt="Hero Section"   className="rounded-full object-cover w-full h-full" /> */}
+
                                 <Image
                                     src={serverurl.replace('/api', '') + homeDetail?.contact[0].image}
                                     alt="Frans Geenen"
