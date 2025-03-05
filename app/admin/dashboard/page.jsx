@@ -19,7 +19,7 @@ import { TbLayoutNavbarInactive } from "react-icons/tb";
 import { IoCodeWorking } from "react-icons/io5";
 import { BsCardHeading } from "react-icons/bs";
 import { MdContactMail } from "react-icons/md";
-
+import { MdDataSaverOff } from "react-icons/md";
 import NavbarPage from '../NavbarPage'
 import HeroAndAbout from "../HeroAndAbout";
 import Services from "../Services";
@@ -30,7 +30,7 @@ import Footer from "./Footer";
 import ContactSection from "../ContactSection";
 import Requests from "./Requests";
 
-
+import MetaData from "../MetaData";
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPage, setSelectedPage] = useState("Welcome"); 
@@ -59,7 +59,7 @@ const handleLogout = () => {
     { name: "Contact", icon: <MdContactMail /> },
     { name: "Requests", icon: <MdContactMail /> },
     // { name: "SMTP Setup", icon: <MdContactMail /> },
-
+    { name: "SEO", icon: <MdDataSaverOff /> },
 
 
   ];
@@ -81,7 +81,7 @@ const handleLogout = () => {
     Requests: <Requests/>,
     // "SMTP Setup": <p>hi</p>,
 
-
+    SEO: <MetaData/>,
 
   };
 
