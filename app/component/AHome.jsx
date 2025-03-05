@@ -210,8 +210,6 @@ export default function Home({ homeDetail }) {
                             
                     
                            
-
-
                             </div>
                         </div>
                     </div>
