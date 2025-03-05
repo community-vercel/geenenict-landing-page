@@ -140,8 +140,14 @@ const WordMethod = () => {
               <div>
                 <p><strong>Header:</strong> {method.header}</p>
                 <p><strong>Title:</strong> {method.title}</p>
-                <p><strong>Description:</strong> {method.description}</p>
-              </div>
+                {/* <div className="bg-gray-500 w-full " 
+  dangerouslySetInnerHTML={{ 
+    __html: method.description.length > 500 
+      ? `${method.description.substring(0, 500)}...` 
+      : method.description 
+  }} 
+/>       */}
+   </div>
               <div className="space-x-2 space-y-3">
                 <button onClick={() => handleEdit(method)} className="bg-yellow-500 text-white px-3 py-1 rounded">Edit</button>
                 <button onClick={() => handleDelete(method._id)} className="bg-red-500 text-white px-3 py-1 rounded">Delete</button>

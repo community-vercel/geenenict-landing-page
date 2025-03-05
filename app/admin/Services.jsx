@@ -137,7 +137,7 @@ const Services = () => {
         onEditorChange={(newValue) => setDescription(newValue)} 
         init={{ placeholder: "Description..." }} 
       />
-      
+
 
       <input 
         type="file" 
@@ -196,10 +196,10 @@ const Services = () => {
     />
   )}
 </td>
-                  <td className="border border-gray-300 p-2">
+                  <td className="border border-gray-300 p-2 space-y-2">
                     <button 
                       onClick={() => handleEdit(service)} 
-                      className="bg-yellow-500 text-white px-3 py-1 rounded mr-2"
+                      className="bg-yellow-500 text-white px-3 py-1 rounded mr-2 "
                     >
                       Edit
                     </button>

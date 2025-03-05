@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const Footer = () => {
   const [footer, setFooter] = useState(null);
+  const [message, setMessage] = useState({ type: "", text: "" }); // State for messages
   const [formData, setFormData] = useState({
     title: "",
     address: "",
@@ -22,14 +21,14 @@ const Footer = () => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}footer/get`);
       const data = await response.json();
       if (response.ok && data.data) {
-        const { _id, __v, companyName, companyLink, ...filteredData } = data.data; // Exclude _id, __v, companyName, companyLink
+        const { _id, __v, companyName, companyLink, ...filteredData } = data.data;
         setFooter(filteredData);
         setFormData(filteredData);
       } else {
-        toast.error("Failed to fetch footer data.");
+        setMessage({ type: "error", text: "Failed to fetch footer data." });
       }
     } catch (error) {
-      toast.error("Error fetching footer.");
+      setMessage({ type: "error", text: "Error fetching footer." });
     }
   };
 
@@ -51,13 +50,13 @@ const Footer = () => {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        toast.success(successMessage);
+        setMessage({ type: "success", text: successMessage });
         setTimeout(fetchFooter, 500);
       } else {
-        toast.error(errorMessage);
+        setMessage({ type: "error", text: errorMessage });
       }
     } catch {
-      toast.error(errorMessage);
+      setMessage({ type: "error", text: errorMessage });
     }
   };
 
@@ -68,7 +67,7 @@ const Footer = () => {
         method: "DELETE",
       });
       if (response.ok) {
-        toast.success("Footer deleted successfully!");
+        setMessage({ type: "success", text: "Footer deleted successfully!" });
         setFooter(null);
         setFormData({
           title: "",
@@ -82,16 +81,27 @@ const Footer = () => {
           copyright: "",
         });
       } else {
-        toast.error("Error deleting footer.");
+        setMessage({ type: "error", text: "Error deleting footer." });
       }
     } catch {
-      toast.error("Error deleting footer.");
+      setMessage({ type: "error", text: "Error deleting footer." });
     }
   };
 
   return (
     <div className="p-6 max-w-3xl mx-auto bg-white rounded-lg">
       <h2 className="text-xl font-semibold mb-4">Footer Management</h2>
+
+      {/* Message Display */}
+      {message.text && (
+        <div
+          className={`p-2 mb-4 text-sm rounded-md ${
+            message.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+          }`}
+        >
+          {message.text}
+        </div>
+      )}
 
       {/* Footer Form */}
       <div className="grid grid-cols-2 gap-4 text-start">

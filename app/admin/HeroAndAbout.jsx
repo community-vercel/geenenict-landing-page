@@ -187,11 +187,12 @@ const HeroAndAbout = () => {
           data.map((item) => (
             <div key={item._id} className="border p-4 rounded shadow-md flex justify-between items-center">
               <div>
+
+               <div className="" dangerouslySetInnerHTML={{ __html:item.title}} />
                 <p><strong>Header:</strong> {item.header}</p>
                 <p><strong>Subtitle:</strong> {item.subtitle}</p>
-                <p><strong>title:</strong> {item.title}</p>
               </div>
-              <div className="space-x-2">
+              <div className="space-x-2 space-y-2">
                 <button onClick={() => handleEdit(item)} className="bg-yellow-500 text-white px-3 py-1 rounded">
                   Edit
                 </button>

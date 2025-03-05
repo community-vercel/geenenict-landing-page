@@ -115,9 +115,8 @@ const ProjectSectionForm = () => {
       <h2 className="text-xl font-semibold mt-6">Project Header List</h2>
       <ul className="mt-4 space-y-2">
         {projects.map((project) => (
-          <li key={project._id} className="p-4 bg-gray-100 rounded-lg shadow-sm">
-            <h3 className="font-medium">{project.title}</h3>
-            <p className="text-gray-600">{project.description}</p>
+          <li key={project._id} className="p-4 bg-gray-500 rounded-lg shadow-sm">
+            <div className="font-medium"><div dangerouslySetInnerHTML={{__html:project.title}} /> </div>
             <div className="mt-2 space-x-2">
               <button
                 className="px-4 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"

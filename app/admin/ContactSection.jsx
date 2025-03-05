@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const ContactSection = () => {
   const [contact, setContact] = useState(null);
+  const [message, setMessage] = useState({ type: "", text: "" }); // State for messages
   const [formData, setFormData] = useState({
     title: "",
     image: null, // File input for image
@@ -20,10 +19,10 @@ const ContactSection = () => {
         setContact(data[0]);
         setFormData({ title: data[0].title, image: null });
       } else {
-        toast.error("No contact section found.");
+        setMessage({ type: "error", text: "No contact section found." });
       }
     } catch {
-      toast.error("Error fetching contact section.");
+      setMessage({ type: "error", text: "Error fetching contact section." });
     }
   };
 
@@ -54,13 +53,13 @@ const ContactSection = () => {
       });
 
       if (response.ok) {
-        toast.success("Contact section created successfully!");
+        setMessage({ type: "success", text: "Contact section created successfully!" });
         fetchContact();
       } else {
-        toast.error("Error creating contact section.");
+        setMessage({ type: "error", text: "Error creating contact section." });
       }
     } catch {
-      toast.error("Error creating contact section.");
+      setMessage({ type: "error", text: "Error creating contact section." });
     }
   };
 
@@ -79,13 +78,13 @@ const ContactSection = () => {
       });
 
       if (response.ok) {
-        toast.success("Contact section updated successfully!");
+        setMessage({ type: "success", text: "Contact section updated successfully!" });
         fetchContact();
       } else {
-        toast.error("Error updating contact section.");
+        setMessage({ type: "error", text: "Error updating contact section." });
       }
     } catch {
-      toast.error("Error updating contact section.");
+      setMessage({ type: "error", text: "Error updating contact section." });
     }
   };
 
@@ -99,20 +98,31 @@ const ContactSection = () => {
       });
 
       if (response.ok) {
-        toast.success("Contact section deleted successfully!");
+        setMessage({ type: "success", text: "Contact section deleted successfully!" });
         setContact(null);
         setFormData({ title: "", image: null });
       } else {
-        toast.error("Error deleting contact section.");
+        setMessage({ type: "error", text: "Error deleting contact section." });
       }
     } catch {
-      toast.error("Error deleting contact section.");
+      setMessage({ type: "error", text: "Error deleting contact section." });
     }
   };
 
   return (
     <div className="p-6 max-w-xl mx-auto bg-white shadow-md rounded-lg">
       <h2 className="text-xl font-semibold mb-4">Contact Section</h2>
+
+      {/* Message Display */}
+      {message.text && (
+        <div
+          className={`p-2 mb-4 text-sm rounded-md ${
+            message.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+          }`}
+        >
+          {message.text}
+        </div>
+      )}
 
       {/* Form */}
       <div className="flex flex-col gap-4">
@@ -124,7 +134,7 @@ const ContactSection = () => {
             value={formData.title}
             onChange={handleChange}
             placeholder="Enter title"
-            className="p-2  py-12 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
+            className="p-2 py-12 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
           />
         </div>
 
