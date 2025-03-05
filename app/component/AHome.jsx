@@ -109,8 +109,6 @@ export default function Home({ homeDetail }) {
                 property="og:description"
                 content={metadata.openGraph.description}
             />
-            
-
             <meta property="og:url" content={metadata.openGraph.url} />
             <meta property="og:image" content={metadata.openGraph.images} />
             <meta name="twitter:title" content={metadata.twitter.title} />
@@ -178,15 +176,15 @@ export default function Home({ homeDetail }) {
                         {homeDetail && homeDetail?homeDetail?.sliders[0].subtitle:'Welcome to Digidaal'}   </H2>
                     <H3 className="italic text-gray-600">{homeDetail && homeDetail?homeDetail?.sliders[0].subsubtitle:'Nice to meet you!'}          </H3>
                 </section>
-{sanitizedHTML2?
- <section className="bg-[#3D4A46] text-white mb-6 min-h-screen/2">
+
+                <section className="bg-[#3D4A46] text-white mb-6 min-h-screen/2">
                     <div className="container max-w-full w-full  mx-auto text-center py-7 px-6 bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-lg">
                         <div className="container max-w-full w-6xl   mx-auto text-center py-2 px-6 bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-lg">
-{sanitizedHTML2?  <H3 className="max-w-full w-full  min-h-screen/2  mx-auto text-gray-300 text-lg leading-relaxed"
+
+                            <H3 className="max-w-full w-full  min-h-screen/2  mx-auto text-gray-300 text-lg leading-relaxed"
                                 dangerouslySetInnerHTML={{ __html: sanitizedHTML2 }}
 
-                            />:''}
-                          
+                            />
 
 
                         </div>
@@ -195,27 +193,24 @@ export default function Home({ homeDetail }) {
 
                         <div className="grid md:grid-cols-2 gap-8   min-h-screen/2 text-left">
                             <div className="bg-gray-700 bg-opacity-50 mt-12 p-6 rounded-lg shadow-md border-l-4 border-orange-500">
-{sanitizedHTML3?  <div
+
+                                <div
                                     dangerouslySetInnerHTML={{ __html: sanitizedHTML3 }}
 
-                                />:''}
-                              
+                                />
                             </div>
 
-                      <div className="bg-gray-700 bg-opacity-50 p-6 mt-12 rounded-lg shadow-md border-l-4 border-orange-500">
-                            {sanitizedHTML4?
+                            <div className="bg-gray-700 bg-opacity-50 p-6 mt-12 rounded-lg shadow-md border-l-4 border-orange-500">
                                 <div
                                     dangerouslySetInnerHTML={{ __html: sanitizedHTML4 }}
 
-                               
-                            />:''}
-                            
+                                />
+
+
                             </div>
                         </div>
                     </div>
                 </section>
-:''}
-               
 
                 <div className="bg-gradient-to-b from-gray-900 to-gray-800 text-white py-16">
                     <H2 className="text-center text-4xl font-bold mb-12">
