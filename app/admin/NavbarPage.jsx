@@ -123,7 +123,6 @@ const NavbarPage = () => {
         {message && <p className="text-start text-red-500 mb-4">{message}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/ Logo Upload /}
           <div>
             <label className="block text-gray-700 font-medium text-start">Upload Logo</label>
             <input
@@ -132,7 +131,6 @@ const NavbarPage = () => {
               onChange={handleFileChange}
               className="w-full border rounded-md px-3 py-2"
             />
-            {/ Display Selected or Existing Image /}
             {newLogoPreview ? (
               <img src={newLogoPreview} alt="New Logo Preview" className="w-20 h-20 mt-2 rounded-md object-contain" />
             ) : (
@@ -142,7 +140,6 @@ const NavbarPage = () => {
             )}
           </div>
 
-          {/ Logo Text /}
           <div>
             <label className="block text-gray-700 font-medium text-start">Logo Text</label>
             <input
@@ -155,7 +152,7 @@ const NavbarPage = () => {
             />
           </div>
 
-          {/ Button Text /}
+   
           <div>
             <label className="block text-gray-700 font-medium text-start">Button Text</label>
             <input
@@ -168,7 +165,8 @@ const NavbarPage = () => {
             />
           </div>
 
-          {/ Submit Button /}
+
+
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
@@ -178,10 +176,10 @@ const NavbarPage = () => {
         </form>
       </div>
 
-      {/ Display Navbar Items /}
+ 
       <div className="w-full mt-6 px-24">
         <h3 className="text-xl font-semibold text-start mb-2">Navbar Items</h3>
-        {navbarItems.length === 0 ? (
+        {navbarItems.length === 0 ? (            
           <p className="text-gray-500">No navbar items added yet.</p>
         ) : (
           navbarItems.map((item) => (
