@@ -25,7 +25,7 @@ async function fetchData(endpoint) {
 
   try {
     const response = await fetch(`${serverUrl}${endpoint}`, {
-      next: { revalidate: 30 }, // Cache data and revalidate after 30 seconds
+      next: { revalidate:9  }, // Cache data and revalidate after 30 seconds
     });
 
     if (!response.ok) {

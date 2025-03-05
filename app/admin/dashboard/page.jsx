@@ -65,7 +65,7 @@ const handleLogout = () => {
   ];
 
 
-  
+
 
   
   // Content for each menu item
@@ -146,7 +146,13 @@ const handleLogout = () => {
             <h1>admin</h1>
           </div>
         </header>
+ {selectedPage === "Welcome" && <div className="min-h-screen bg-gray-100">
+      <div className="bg-green-500 text-white text-center p-3">
+        <h1 className="text-2xl font-semibold">Welcome to Dashboard</h1>
+      </div>
 
+      
+    </div>}
 
         {/* Dynamic Content Rendering */}
         <main className="flex-1 p-6">{pageContent[selectedPage]}</main>
