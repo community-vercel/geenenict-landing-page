@@ -22,10 +22,11 @@ async function fetchData(endpoint) {
     throw new Error("Server URL is not defined in environment variables.");
   }
 
-  
+
   try {
     const response = await fetch(`${serverUrl}${endpoint}`, {
- revalidate: 66 ,
+      cache: 'no-store',
+      revalidate:  0 
     });
 
     if (!response.ok) {
