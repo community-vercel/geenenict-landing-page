@@ -168,8 +168,6 @@ export default function Home({ homeDetail }) {
                     </div>
 
 
-                    
-
                     {/* Name and Subtitle */}
                     <H2 className="text-2xl md:text-3xl font-semibold text-orange-500 mt-8 animate-fade-in">
                         {homeDetail?.sliders[0].subtitle}  </H2>
