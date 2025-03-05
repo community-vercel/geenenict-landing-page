@@ -173,11 +173,11 @@ export default function Home({ homeDetail }) {
                     <H3 className="italic text-gray-600">{homeDetail?.sliders[0].subsubtitle}          </H3>
                 </section>
 
-                <section className="bg-[#3D4A46] text-white py-12">
-                    <div className="container mx-auto text-center py-7 px-6 bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-lg">
-                        <div className="container max-w-6xl   mx-auto text-center py-2 px-6 bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-lg">
+                <section className="bg-[#3D4A46] text-white py-12 ">
+                    <div className="container max-w-full w-full  mx-auto text-center py-7 px-6 bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-lg">
+                        <div className="container max-w-full w-6xl   mx-auto text-center py-2 px-6 bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-lg">
 
-                            <H3 className=" mx-auto text-gray-300 text-lg leading-relaxed"
+                            <H3 className="max-w-full w-full  mx-auto text-gray-300 text-lg leading-relaxed"
                                 dangerouslySetInnerHTML={{ __html: sanitizedHTML2 }}
 
                             />
@@ -213,10 +213,10 @@ export default function Home({ homeDetail }) {
                     <H2 className="text-center text-4xl font-bold mb-12">
                         My <span className="text-orange-500">Services</span>
                     </H2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto px-6">
+                    <div className="grid grid-cols-1 max-w-full w-full  sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto px-6">
 
                         {homeDetail?.services.data.map((service) => (
-                            <div key={service._id} className="bg-gray-800 p-6 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
+                            <div key={service._id} className="bg-gray-800  p-6 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
                                 <div className="text-orange-400 text-4xl mb-4">
                                     <Image
                                         src={serverurl.replace('/api/', '') + service.image} alt={service.title}
@@ -243,7 +243,7 @@ export default function Home({ homeDetail }) {
                 {/* <hr className="h-px my-8 bg-red-500 border-0 dark:bg-gray-700" /> */}
                 <section className="bg-[#3D4A46] text-white py-8 mt-2 lg:mt-8">
 
-                    <div className="max-w-7xl mx-auto text-center px-6 py-4 lg:py-14 bg-gradient-to-r from-[#2C3E50] to-[#34495E] rounded-lg shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+                    <div className="max-w-full w-full mx-auto text-center px-6 py-4 lg:py-14 bg-gradient-to-r from-[#2C3E50] to-[#34495E] rounded-lg shadow-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
                         <div
 
                             dangerouslySetInnerHTML={{ __html: homeDetail?.workmethod[0].description }}
