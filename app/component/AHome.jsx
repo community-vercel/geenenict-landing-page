@@ -166,6 +166,8 @@ export default function Home({ homeDetail }) {
                         {/* Subtle Glowing Effect */}
                         {/* <div className="absolute inset-0 w-full h-full rounded-full animate-pulse bg-orange-400 opacity-20 blur-lg"></div> */}
                     </div>
+                    
+
 
 
                     {/* Name and Subtitle */}
