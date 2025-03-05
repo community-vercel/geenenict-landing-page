@@ -208,8 +208,7 @@ export default function Home({ homeDetail }) {
                                
                             />:''}
                             
-                        
-
+                    
                            
 
 
