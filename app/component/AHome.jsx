@@ -177,7 +177,7 @@ export default function Home({ homeDetail }) {
                     <H3 className="italic text-gray-600">{homeDetail?.sliders[0].subsubtitle}          </H3>
                 </section>
 
-                <section className="bg-[#3D4A46] text-white py-12 ">
+                <section className="bg-[#3D4A46] text-white mb-6">
                     <div className="container max-w-full w-full  mx-auto text-center py-7 px-6 bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-lg">
                         <div className="container max-w-full w-6xl   mx-auto text-center py-2 px-6 bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-lg">
 
