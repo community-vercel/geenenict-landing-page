@@ -109,6 +109,7 @@ export default function Home({ homeDetail }) {
                 property="og:description"
                 content={metadata.openGraph.description}
             />
+            
             <meta property="og:url" content={metadata.openGraph.url} />
             <meta property="og:image" content={metadata.openGraph.images} />
             <meta name="twitter:title" content={metadata.twitter.title} />

@@ -26,7 +26,7 @@ async function fetchData(endpoint) {
   try {
     const response = await fetch(`${serverUrl}${endpoint}`, {
       cache: 'no-store',
-      revalidate:  0 
+    
     });
 
     if (!response.ok) {
