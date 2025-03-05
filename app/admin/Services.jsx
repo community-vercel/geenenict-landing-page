@@ -118,6 +118,7 @@ const Services = () => {
     ;
   };
 
+
   return (
     <div className="flex flex-col justify-start mx-64 space-y-4">
       <h2 className="text-xl font-bold">Services Section</h2>
@@ -128,8 +129,6 @@ const Services = () => {
         placeholder="Title" 
         className="border rounded p-2 w-full" 
       />
-
-
 
 
       <Editor 
