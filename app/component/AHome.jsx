@@ -414,7 +414,7 @@ export default function Home({ homeDetail }) {
                             }</strong></p>
                             <p>📧 Email: <Link href={`mailto:${homeDetail?.footer.data.email}`} className="text-orange-400 hover:underline">{homeDetail?.footer.data.email}</Link></p>
                             <p>📞 Phone: <Link href={`tel:${homeDetail?.footer.data.phone}`} className="text-orange-400 hover:underline">{homeDetail?.footer.data.phone}</Link></p>
-                            <p>🌍 LinkedIn: <Link href={`${homeDetail?.footer.data.linkedin}`} target="_blank" className="text-orange-400 hover:underline">{homeDetail?.footer.data.linkedin}</Link></p>
+                            <p>🌍 LinkedIn: <Link href={homeDetail?.footer.data.linkedin} target="_blank" className="text-orange-400 hover:underline">{homeDetail?.footer.data.linkedin}</Link></p>
                         </div>
 
                         {/* Social Icons */}
@@ -434,7 +434,7 @@ export default function Home({ homeDetail }) {
 
                         {/* Copyright */}
                         <div className="mt-4 text-gray-400 text-xs">
-                            <p>{homeDetail?.footer.data.copyright} <Link href={homeDetail?.footer.data.companyLink} className="text-orange-400 hover:underline"> {homeDetail?.footer.data.companyName}</Link></p>
+                            <p>{homeDetail?.footer.data.copyright} <Link href="https://sharplogicians.com/" className="text-orange-400 hover:underline"> {homeDetail?.footer.data.companyName}</Link></p>
                         </div>
                     </div>
                 </footer>
