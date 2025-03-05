@@ -25,10 +25,9 @@ async function fetchData(endpoint) {
 
   try {
     const response = await fetch(`${serverUrl}${endpoint}`, {
-      cache: 'no-store',
+      next: { revalidate: 30 }, // Cache data and revalidate after 30 seconds
     });
 
-    
     if (!response.ok) {
       throw new Error(`Failed to fetch data from ${endpoint}: ${response.statusText}`);
     }
