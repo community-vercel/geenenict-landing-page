@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaBars,
   FaTimes,
@@ -23,9 +23,7 @@ import { FaLaptopFile } from "react-icons/fa6";
 import { AiOutlineWechatWork } from "react-icons/ai";
 import { GrContact } from "react-icons/gr";
 import { FcCollaboration } from "react-icons/fc";
-
-
-
+import { useRouter } from "next/navigation";
 
 import NavbarPage from "../NavbarPage";
 import HeroAndAbout from "../HeroAndAbout";
@@ -43,6 +41,18 @@ import Workingwith from "../Workingwith";
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedPage, setSelectedPage] = useState("Welcome");
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+  const router = useRouter();
+
+  // Check authentication on component mount
+  useEffect(() => {
+    const token = localStorage.getItem("token"); // Check for token in localStorage
+    if (!token) {
+      setIsLoggedIn(false); // User is not logged in
+    } else {
+      setIsLoggedIn(true); // User is logged in
+    }
+  }, []);
 
   const handleLogout = () => {
     // Remove token or session data
@@ -50,7 +60,7 @@ const Dashboard = () => {
     sessionStorage.removeItem("user");
 
     // Redirect to login page
-    window.location.href = "/admin/login"; // Change according to your route
+    router.push("/admin/login"); // Change according to your route
   };
 
   // Menu items with icons
@@ -63,7 +73,6 @@ const Dashboard = () => {
     { name: "Projects", icon: <GoProjectSymlink /> },
     { name: "Footer", icon: <MdOutlineBorderBottom /> },
     { name: "collaboration", icon: <FcCollaboration /> },
-
     { name: "Contact", icon: <MdContactMail /> },
     { name: "Requests", icon: <GrContact /> },
     { name: "SEO", icon: <MdDataSaverOff /> },
@@ -80,7 +89,7 @@ const Dashboard = () => {
     Contact: <ContactSection />,
     Projects: <ProjectLists />,
     Footer: <Footer />,
-    collaboration:<Workingwith/>,
+    collaboration: <Workingwith />,
     Requests: <Requests />,
     SEO: <MetaData />,
     "SMTP Setup": <SMTPSetup />,
@@ -89,86 +98,109 @@ const Dashboard = () => {
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar (Drawer) */}
-      <div
-        className={`fixed inset-y-0 left-0 w-64 bg-gray-800 text-white transition-transform transform ${
-          isOpen ? "translate-x-0" : "-translate-x-64"
-        } md:relative md:translate-x-0 z-50`}
-      >
-        <div className="p-4 flex justify-between items-center">
-          <h2 className="text-2xl font-bold">Dashboard</h2>
-          <button className="md:hidden" onClick={() => setIsOpen(false)}>
-            <FaTimes size={20} />
-          </button>
-        </div>
-        <nav className="mt-4">
-          <ul>
-            {menuItems.map((item) => (
+      {isLoggedIn && (
+        <div
+          className={`fixed inset-y-0 left-0 w-64 bg-gray-800 text-white transition-transform transform ${
+            isOpen ? "translate-x-0" : "-translate-x-64"
+          } md:relative md:translate-x-0 z-50`}
+        >
+          <div className="p-4 flex justify-between items-center">
+            <h2 className="text-2xl font-bold">Dashboard</h2>
+            <button className="md:hidden" onClick={() => setIsOpen(false)}>
+              <FaTimes size={20} />
+            </button>
+          </div>
+          <nav className="mt-4">
+            <ul>
+              {menuItems.map((item) => (
+                <li
+                  key={item.name}
+                  className={`flex items-center gap-3 p-3 cursor-pointer ${
+                    selectedPage === item.name
+                      ? "bg-blue-600 font-bold"
+                      : "hover:bg-gray-700"
+                  }`}
+                  onClick={() => {
+                    setSelectedPage(item.name);
+                    setIsOpen(false);
+                  }}
+                >
+                  {item.icon} {item.name}
+                </li>
+              ))}
               <li
-                key={item.name}
-                className={`flex items-center gap-3 p-3 cursor-pointer ${
-                  selectedPage === item.name
-                    ? "bg-blue-600 font-bold"
-                    : "hover:bg-gray-700"
-                }`}
-                onClick={() => {
-                  setSelectedPage(item.name);
-                  setIsOpen(false);
-                }}
+                className="flex items-center gap-3 p-3 hover:bg-red-600 text-white cursor-pointer transition-all duration-300"
+                onClick={handleLogout}
               >
-                {item.icon} {item.name}
+                <FaSignOutAlt />
+                <span>Logout</span>
               </li>
-            ))}
-            <li
-              className="flex items-center gap-3 p-3 hover:bg-red-600 text-white cursor-pointer transition-all duration-300"
-              onClick={handleLogout}
-            >
-              <FaSignOutAlt />
-              <span>Logout</span>
-            </li>
-          </ul>
-        </nav>
-      </div>
+            </ul>
+          </nav>
+        </div>
+      )}
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Navbar */}
-        <header className="bg-blue-600 text-white p-4 flex justify-between items-center shadow-md">
-          <button
-            className="md:hidden text-white"
-            onClick={() => setIsOpen(true)}
-          >
-            <FaBars size={20} />
-          </button>
-          <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-          <div className="flex items-center gap-4">
-            <img
-              src="https://icons.veryicon.com/png/o/miscellaneous/user-avatar/user-avatar-male-5.png"
-              alt="Profile"
-              className="w-10 h-10 rounded-full"
-            />
-            <h1>Admin</h1>
-          </div>
-        </header>
+        {isLoggedIn && (
+          <header className="bg-blue-600 text-white p-4 flex justify-between items-center shadow-md">
+            <button
+              className="md:hidden text-white"
+              onClick={() => setIsOpen(true)}
+            >
+              <FaBars size={20} />
+            </button>
+            <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+            <div className="flex items-center gap-4">
+              <img
+                src="https://icons.veryicon.com/png/o/miscellaneous/user-avatar/user-avatar-male-5.png"
+                alt="Profile"
+                className="w-10 h-10 rounded-full"
+              />
+              <h1>Admin</h1>
+            </div>
+          </header>
+        )}
 
-        {/* Welcome Message */}
-        {selectedPage === "Welcome" && (
+        {/* Show "You are not logged in" message if not authenticated */}
+        {!isLoggedIn && (
           <div className="flex-1 flex items-center justify-center bg-gray-100">
             <div className="text-center">
               <h1 className="text-4xl font-bold text-gray-800 mb-4">
-                Welcome to Dashboard
+                You are not logged in.
               </h1>
               <p className="text-gray-600">
-                Select a section from the sidebar to get started.
+                Please <a href="/admin/login" className="text-blue-500">login</a> to access the dashboard.
               </p>
             </div>
           </div>
         )}
 
-        {/* Dynamic Content Rendering */}
-        {selectedPage !== "Welcome" && (
-          <main className="flex-1 p-6 overflow-y-auto bg-gray-100">
-            {pageContent[selectedPage]}
-          </main>
+        {/* Show dashboard content if authenticated */}
+        {isLoggedIn && (
+          <>
+            {/* Welcome Message */}
+            {selectedPage === "Welcome" && (
+              <div className="flex-1 flex items-center justify-center bg-gray-100">
+                <div className="text-center">
+                  <h1 className="text-4xl font-bold text-gray-800 mb-4">
+                    Welcome to Dashboard
+                  </h1>
+                  <p className="text-gray-600">
+                    Select a section from the sidebar to get started.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Dynamic Content Rendering */}
+            {selectedPage !== "Welcome" && (
+              <main className="flex-1 p-6 overflow-y-auto bg-gray-100">
+                {pageContent[selectedPage]}
+              </main>
+            )}
+          </>
         )}
       </div>
     </div>

@@ -28,13 +28,16 @@ const Login = () => {
 
       console.log(response.data);
 
+      // Store the token in localStorage
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token); // Store the token
+      }
+
       // Redirect to dashboard after successful login
-      setTimeout(() => {
-        router.push("/admin/dashboard");
-      }, 200);
+      router.push("/admin/dashboard");
     } catch (err) {
       setLoading(false); // Stop loading
-      setError(err.response?.data?.message || "Login failed. Try again.");
+      setError(err.response?.data?.message || "Login failed. Please try again.");
     }
   };
 

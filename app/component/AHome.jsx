@@ -57,9 +57,12 @@ export default function Home({ homeDetail }) {
 
     const serverurl = process.env.NEXT_PUBLIC_DJANGO_URLS;
     useEffect(() => {
+        if (homeDetail?.sliders?.[0]?.title) {
+            const sanitizedContent = sanitizeHTML(homeDetail.sliders[0].title);
+            setsanitizedhtml(sanitizedContent);
+        }
 
-
-        setsanitizedhtml(homeDetail?.sliders[0].title)
+        // setsanitizedhtml(homeDetail?.sliders[0].title)
         setsanitizedhtml2(homeDetail?.sliders[0].description)
         setsanitizedhtml3(homeDetail?.sliders[0].whoIAm)
         setsanitizedhtml4(homeDetail?.sliders[0].expertise)
@@ -67,7 +70,11 @@ export default function Home({ homeDetail }) {
 
 
 
-    }), []
+    }), [homeDetail]
+    const sanitizeHTML = (html) => {
+        // For example, using a simple replace or a proper sanitizer library
+        return html.replace(/<script[^>]*>([\S\s]*?)<\/script>/g, '');
+    };
     const metadata = {
         title: homeDetail.seo[0]?.metaname
             ? String(homeDetail?.seo[0].metaname)
@@ -119,29 +126,29 @@ export default function Home({ homeDetail }) {
                 <header className="bg-gradient-to-b from-gray-300 to-white py-0 px-6 flex items-center justify-between flex-wrap">
                     {/* Logo */}
                     <div className="flex items-center justify-center gap-4 mx-auto lg:mx-0">
-                    <Link href="/">
-                        {homeDetail?.homeDetail[0].logo ?
-                       
-                            <Image
-                                src={`${homeDetail?.homeDetail[0].logo}`} 
-                                alt="Frans Geenen"
-                                width={48}
-                                height={48}
-                                priority
-                                className="rounded-full object-contain w-24 h-24"
-                            />
-                            
-                      
-                            : <span className="text-5xl font-extrabold text-[#3D4A46] tracking-tight hover:text-[#
+                        <Link href="/">
+                            {homeDetail?.homeDetail[0].logo ?
+
+                                <Image
+                                    src={`${homeDetail?.homeDetail[0].logo}`}
+                                    alt="Frans Geenen"
+                                    width={48}
+                                    height={48}
+                                    priority
+                                    className="rounded-full object-contain w-24 h-24"
+                                />
+
+
+                                : <span className="text-5xl font-extrabold text-[#3D4A46] tracking-tight hover:text-[#
 #040414] transition duration-500 ease-in-out transform hover:scale-110 hover:shadow-lg hover:shadow-[#
 #040414]">
-                                {homeDetail?.homeDetail[0].logoText
-                                }
+                                    {homeDetail?.homeDetail[0].logoText
+                                    }
 
-                            </span>
+                                </span>
 
-                        }
-                          </Link>
+                            }
+                        </Link>
                     </div>
 
                     <Link
@@ -153,11 +160,11 @@ export default function Home({ homeDetail }) {
                 </header>
                 <section className="flex flex-col items-center text-center py-24 bg-gradient-to-b from-gray-200 to-white">
                     {/* Title */}
-                    <H1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-700 mt-10 w-full max-w-4xl leading-tight"
+                   
+                    <H1
+  className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-700 mt-10 w-full max-w-4xl leading-tight"
+  dangerouslySetInnerHTML={{ __html: sanitizedHTML || "Your Specialist in Cloud Security & Application Management" }} />
 
-                        dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
-
-                    />
 
                     {/* Avatar Image with Glow Effect */}
                     <div className="relative mt-10">
@@ -174,22 +181,22 @@ export default function Home({ homeDetail }) {
                         {/* Subtle Glowing Effect */}
                         {/* <div className="absolute inset-0 w-full h-full rounded-full animate-pulse bg-orange-400 opacity-20 blur-lg"></div> */}
                     </div>
-                    
+
 
 
 
 
                     {/* Name and Subtitle */}
                     <H2 className="text-2xl md:text-3xl font-semibold text-[#0464af] mt-8 animate-fade-in">
-                        {homeDetail && homeDetail?homeDetail?.sliders[0].subtitle:'Welcome to Digidaal'}   </H2>
-                    <H3 className="italic text-gray-600">{homeDetail && homeDetail?homeDetail?.sliders[0].subsubtitle:'Nice to meet you!'}          </H3>
+                        {homeDetail && homeDetail ? homeDetail?.sliders[0].subtitle : 'Welcome to Digidaal'}   </H2>
+                    <H3 className="italic text-gray-600">{homeDetail && homeDetail ? homeDetail?.sliders[0].subsubtitle : 'Nice to meet you!'}          </H3>
                 </section>
 
                 <section className="bg-[#041c5c] text-white mb-6 min-h-[50vh]">  {/* Use a fixed min-height */}
-    <div className="container max-w-full w-full mx-auto text-center py-7 px-6 bg-[#041c5c] rounded-2xl shadow-lg">
-        <div className="container max-w-full w-6xl mx-auto text-center py-2 px-6 bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-lg">
-            
-        <H3 className="max-w-full w-full min-h-[30vh] mx-auto text-gray-300 text-lg leading-relaxed"
+                    <div className="container max-w-full w-full mx-auto text-center py-7 px-6 bg-[#041c5c] rounded-2xl shadow-lg">
+                        <div className="container max-w-full w-6xl mx-auto text-center py-2 px-6 bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-lg">
+
+                            <H3 className="max-w-full w-full min-h-[30vh] mx-auto  text-lg leading-relaxed"
                                 dangerouslySetInnerHTML={{ __html: sanitizedHTML2 }}
 
                             />
@@ -201,12 +208,12 @@ export default function Home({ homeDetail }) {
 
                         <div className="grid md:grid-cols-2 gap-8   min-h-screen/2 text-left">
 
-                            <div className="min-h-[270px] bg-gray-700 bg-opacity-50 mt-12 p-6 rounded-lg shadow-md border-l-4 border-orange-500">
-    <div dangerouslySetInnerHTML={{ __html: sanitizedHTML3 }} />
-</div>
+                            <div className="min-h-[250px] bg-gray-700 bg-opacity-50 mt-12 p-6 rounded-lg shadow-md border-l-4 border-orange-500">
+                                <div dangerouslySetInnerHTML={{ __html: sanitizedHTML3 }} />
+                            </div>
 
-<div className="min-h-[270px] bg-gray-700 bg-opacity-50 mt-12 p-6 rounded-lg shadow-md border-l-4 border-orange-500">
-<div
+                            <div className="min-h-[250px] bg-gray-700 bg-opacity-50 mt-12 p-6 rounded-lg shadow-md border-l-4 border-orange-500">
+                                <H3
                                     dangerouslySetInnerHTML={{ __html: sanitizedHTML4 }}
 
                                 />
@@ -226,13 +233,14 @@ export default function Home({ homeDetail }) {
                         {homeDetail?.services.data.map((service) => (
                             <div key={service._id} className="bg-gray-800  p-6 rounded-xl shadow-lg hover:bg-[#040414] transform hover:scale-105 transition duration-300">
                                 <div className="text-[#0464af] text-4xl mb-4">
-                                <img src={`data:image/png;base64,${service.image}`} alt="Hero Section"  className="w-12 h-12" />
-                                    {/* <Image
-                                        src={serverurl.replace('/api/', '') + service.image} alt={service.title}
+                                    <Image
+                                        src={`data:image/png;base64,${service.image}`}
+
+                                        alt={service.title}
                                         width={20}
                                         height={20}
-                                        priority
-                                        className="w-12 h-12" /> */}
+                                        loading="lazy"
+                                        className="w-12 h-12" />
                                     {/* <img src={serverurl.replace('api/','')+service.image} alt={service.title} className="w-12 h-12" /> */}
                                 </div>
                                 <h3 className="text-xl font-semibold text-[#0464af]">
@@ -252,7 +260,7 @@ export default function Home({ homeDetail }) {
                 {/* <hr className="h-px my-8 bg-red-500 border-0 dark:bg-gray-700" /> */}
                 <section className="bg-[#041c5c] text-white py-8 mt-2 lg:mt-8">
 
-                    <div className="mx-auto text-center px-6 py-4 lg:py-14  rounded-lg shadow-lg ">
+                    <div className="mx-auto text-center px-6 py-4 lg:py-14  rounded-lg  ">
                         <div
 
                             dangerouslySetInnerHTML={{ __html: homeDetail?.workmethod[0].description }}
@@ -262,43 +270,44 @@ export default function Home({ homeDetail }) {
 
                     </div>
                 </section>
+
                 <hr className="h-px my-8 bg-[#0460a3] border-0 dark:bg-gray-700" />
-                 <section className="py-8 bg-white">
-      <div className="max-w-6xl mx-auto text-center px-6">
-        {/* Heading */}
-        <H4 className="text-2xl font-extrabold text-gray-700 tracking-wide">
-          Some companies I am happy to have collaborated with:
-        </H4>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-5 sm:mt-5 px-6">
-  {homeDetail?.certificate.map((certificate, index) => (
-    <div
-      key={index}
-      className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-[#0460a3] hover:text-white p-6 bg-white rounded-lg group"
-    >
-      {/* Certificate Image */}
-      <div className="flex-shrink-0">
-        <Image
-          src={certificate?.image} // Assuming the certificate has an imageUrl field
-          alt="certificates"
-          width={150} // Set width of 150px
-          height={150} // Set height of 150px
-          loading="lazy"
-          className="w-full max-h-72 object-contain transition-transform duration-300 ease-in-out transform hover:scale-110"
-        />
-      </div>
+                <section className="py-8 bg-white">
+                    <div className="max-w-6xl mx-auto text-center px-6">
+                        {/* Heading */}
+                        <H4 className="text-2xl font-extrabold text-gray-700 tracking-wide">
+                            Some companies I am happy to have collaborated with:
+                        </H4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-5 sm:mt-5 px-6">
+                            {homeDetail?.certificate.map((certificate, index) => (
+                                <div
+                                    key={index}
+                                    className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-[#0460a3] hover:text-white p-6 bg-white rounded-lg group"
+                                >
+                                    {/* Certificate Image */}
+                                    <div className="flex-shrink-0">
+                                        <Image
+                                            src={certificate?.image} // Assuming the certificate has an imageUrl field
+                                            alt="certificates"
+                                            width={150} // Set width of 150px
+                                            height={150} // Set height of 150px
+                                            loading="lazy"
+                                            className="w-full max-h-72 object-contain transition-transform duration-300 ease-in-out transform hover:scale-110"
+                                        />
+                                    </div>
 
-      {/* Certificate Title */}
-      <strong className="text-lg text-orange-500 mt-4 block group-hover:text-white">
-        {certificate.title}
-      </strong>
+                                    {/* Certificate Title */}
+                                    <strong className="text-lg text-orange-500 mt-4 block group-hover:text-white">
+                                        {certificate.title}
+                                    </strong>
 
-      {/* Certificate Description */}
-      <p className="mt-2 text-gray-500 hover:text-white">{certificate.description}</p>
-    </div>
-  ))}
-</div>
-</div>
-</section>
+                                    {/* Certificate Description */}
+                                    <p className="mt-2 text-gray-500 hover:text-white">{certificate.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
 
                 <section className="py-8 bg-[#041c5c] mt-6">
 
@@ -312,33 +321,33 @@ export default function Home({ homeDetail }) {
 
                     {/* Project List */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 sm:mt-5 px-6 hover:text-white">
-  {homeDetail?.allproject.map((project, index) => (
-    <div
-      key={index}
-      className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-bg-[white] hover:text-white p-6 bg-white rounded-lg group"
-    >
-      {/* Project Image */}
-      <div className="flex-shrink-0">
-        <Image
-          src={project.image} // Assuming the project has an imageUrl field
-          alt={project?.title}
-          width={150} // Set width of 150px
-          height={150} // Set height of 150px
-          loading="lazy"
-          className="w-full max-h-72 hover:bg-[white] object-contain transition-transform duration-300 ease-in-out transform hover:scale-110"
-        />
-      </div>
+                        {homeDetail?.allproject.map((project, index) => (
+                            <div
+                                key={index}
+                                className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-bg-[white] hover:text-white p-6 bg-white rounded-lg group"
+                            >
+                                {/* Project Image */}
+                                <div className="flex-shrink-0">
+                                    <Image
+                                        src={project.image} // Assuming the project has an imageUrl field
+                                        alt={project?.title}
+                                        width={150} // Set width of 150px
+                                        height={150} // Set height of 150px
+                                        loading="lazy"
+                                        className="w-full max-h-72 hover:bg-[white] object-contain transition-transform duration-300 ease-in-out transform hover:scale-110"
+                                    />
+                                </div>
 
-      {/* Project Title */}
-      <strong className="text-lg text-[#0460a3] mt-4 block group-hover:text-[#0460a3]">
-        {project.title}
-      </strong>
+                                {/* Project Title */}
+                                <strong className="text-lg text-[#0460a3] mt-4 block group-hover:text-[#0460a3]">
+                                    {project.title}
+                                </strong>
 
-      {/* Project Description */}
-      <p className="mt-2 text-[#040414] hover:text-#000 group-hover:text-[#040414]">{project.description}</p>
-    </div>
-  ))}
-</div>
+                                {/* Project Description */}
+                                <p className="mt-2 text-[#040414] hover:text-#000 group-hover:text-[#040414]">{project.description}</p>
+                            </div>
+                        ))}
+                    </div>
 
 
 
@@ -349,14 +358,14 @@ export default function Home({ homeDetail }) {
                         {/* Profile Image */}
                         <div className="relative mx-auto mb-4">
                             <div className="w-48 h-48 mx-auto rounded-full overflow-hidden">
-                            {/* <img src={`data:image/png;base64,${homeDetail?.contact[0].image}`} alt="Hero Section"   className="rounded-full object-cover w-full h-full" /> */}
+                                {/* <img src={`data:image/png;base64,${homeDetail?.contact[0].image}`} alt="Hero Section"   className="rounded-full object-cover w-full h-full" /> */}
 
                                 <Image
                                     src={serverurl.replace('/api', '') + homeDetail?.contact[0].image}
                                     alt="Frans Geenen"
                                     width={1000}
                                     height={1000}
-                                    priority
+                                    loading="lazy"
                                     className="rounded-full object-cover w-full h-full"
                                 />
 
@@ -475,7 +484,7 @@ export default function Home({ homeDetail }) {
                             }</strong></p>
                             <p>📧 Email: <Link href={`mailto:${homeDetail?.footer.data.email}`} className="text-white hover:underline">{homeDetail?.footer.data.email}</Link></p>
                             <p>📞 Phone: <Link href={`tel:${homeDetail?.footer.data.phone}`} className="text-white hover:underline">{homeDetail?.footer.data.phone}</Link></p>
-                            <p>🌍 LinkedIn: <Link href={homeDetail?.footer.data.linkedin} target="_blank" className="text-white hover:underline">{homeDetail?.footer.data.linkedin}</Link></p>
+                            <p>🌍 LinkedIn: <Link href={`${homeDetail?.footer.data.linkedin}`} rel="noopener noreferrer" target="_blank" className="text-white hover:underline">{homeDetail?.footer.data.linkedin}</Link></p>
                         </div>
 
                         {/* Social Icons */}
