@@ -185,11 +185,11 @@ export default function Home({ homeDetail }) {
                     <H3 className="italic text-gray-600">{homeDetail && homeDetail?homeDetail?.sliders[0].subsubtitle:'Nice to meet you!'}          </H3>
                 </section>
 
-                <section className="bg-[#041c5c] text-white mb-6 min-h-screen/2">
-                    <div className="container max-w-full w-full  mx-auto text-center py-7 px-6 bg-[#041c5c] rounded-2xl shadow-lg">
-                        <div className="container max-w-full w-6xl   mx-auto text-center py-2 px-6 bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-lg">
-
-                            <H3 className="max-w-full w-full  min-h-screen/2  mx-auto text-gray-300 text-lg leading-relaxed"
+                <section className="bg-[#041c5c] text-white mb-6 min-h-[50vh]">  {/* Use a fixed min-height */}
+    <div className="container max-w-full w-full mx-auto text-center py-7 px-6 bg-[#041c5c] rounded-2xl shadow-lg">
+        <div className="container max-w-full w-6xl mx-auto text-center py-2 px-6 bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-lg">
+            
+        <H3 className="max-w-full w-full min-h-[30vh] mx-auto text-gray-300 text-lg leading-relaxed"
                                 dangerouslySetInnerHTML={{ __html: sanitizedHTML2 }}
 
                             />
@@ -200,16 +200,13 @@ export default function Home({ homeDetail }) {
 
 
                         <div className="grid md:grid-cols-2 gap-8   min-h-screen/2 text-left">
-                            <div className="bg-gray-700 bg-opacity-50 mt-12 p-6 rounded-lg shadow-md border-l-4 border-orange-500">
 
-                                <div
-                                    dangerouslySetInnerHTML={{ __html: sanitizedHTML3 }}
+                            <div className="min-h-[270px] bg-gray-700 bg-opacity-50 mt-12 p-6 rounded-lg shadow-md border-l-4 border-orange-500">
+    <div dangerouslySetInnerHTML={{ __html: sanitizedHTML3 }} />
+</div>
 
-                                />
-                            </div>
-
-                            <div className="bg-gray-700 bg-opacity-50 p-6 mt-12 rounded-lg shadow-md border-l-4 border-orange-500">
-                                <div
+<div className="min-h-[270px] bg-gray-700 bg-opacity-50 mt-12 p-6 rounded-lg shadow-md border-l-4 border-orange-500">
+<div
                                     dangerouslySetInnerHTML={{ __html: sanitizedHTML4 }}
 
                                 />
