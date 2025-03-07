@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { H1, H2, H3, H4, H5 } from './Typrography';
 
 export default function Home({ homeDetail }) {
+    console.log(homeDetail)
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -118,9 +119,9 @@ export default function Home({ homeDetail }) {
                 <header className="bg-gradient-to-b from-gray-300 to-white py-4 px-6 flex items-center justify-between flex-wrap">
                     {/* Logo */}
                     <div className="flex items-center justify-center gap-4 mx-auto lg:mx-0">
-                        {homeDetail?.homeDetail[0].image ?
+                        {homeDetail?.homeDetail[0].logo ?
                             <Image
-                                src={serverurl.replace('/api', '') + homeDetail?.homeDetail[0].image}
+                                src={`data:image/png;base64,${homeDetail?.homeDetail[0].logo}`} 
                                 alt="Frans Geenen"
                                 width={1000}
                                 height={1000}
@@ -269,15 +270,33 @@ export default function Home({ homeDetail }) {
 
                     {/* Project List */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 sm:mt-5 px-6">
+      {homeDetail?.allproject.map((project, index) => (
+        <div
+          key={index}
+          className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-[#1E2A33] hover:text-white p-6 bg-white rounded-lg"
+        >
+          {/* Project Image */}
+          <div className="relative w-full h-56 rounded-lg overflow-hidden">
+          <img src={`data:image/png;base64,${project.image}`} alt="Hero Section"  className="w-12 h-12" />
 
-                        {homeDetail?.allproject.map((project, index) => (
-                        <div key={index} className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-[#1E2A33] hover:text-white p-6 bg-white rounded-lg ">
-                        <strong className="text-lg text-orange-500"> {project.title}</strong>
-                        <p className="mt-2 text-white-500 hover:text-white">{project.description}</p>
-                      </div>
-                        ))}
+            <Image
+            
+              src={`data:image/png;base64,${project.image}`} // Assuming the project has an `imageUrl` field
+              alt={project?.title}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-lg"
+            />
+          </div>
 
-                    </div>
+          {/* Project Title */}
+          <strong className="text-lg text-orange-500 mt-4 block">{project.title}</strong>
+
+          {/* Project Description */}
+          <p className="mt-2 text-gray-500 hover:text-white">{project.description}</p>
+        </div>
+      ))}
+    </div>
 
 
 
