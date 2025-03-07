@@ -342,6 +342,7 @@ export default function Home({ homeDetail }) {
 
 
 
+
                 </section>
                 <section className="bg-[#ECEEEE] py-8">
                     <div className="max-w-2xl mx-auto text-center px-6">
