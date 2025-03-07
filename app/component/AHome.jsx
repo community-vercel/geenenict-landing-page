@@ -282,7 +282,7 @@ export default function Home({ homeDetail }) {
       <div className="flex-shrink-0">
         <Image
           src={certificate?.image} // Assuming the certificate has an imageUrl field
-          alt={certificate?.title}
+          alt="certificates"
           width={150} // Set width of 150px
           height={150} // Set height of 150px
           loading="lazy"
