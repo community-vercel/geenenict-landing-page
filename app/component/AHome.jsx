@@ -132,7 +132,9 @@ export default function Home({ homeDetail }) {
                             />
                             
                       
-                            : <span className="text-5xl font-extrabold text-[#3D4A46] tracking-tight hover:text-[#040c49] transition duration-500 ease-in-out transform hover:scale-110 hover:shadow-lg hover:shadow-orange-400">
+                            : <span className="text-5xl font-extrabold text-[#3D4A46] tracking-tight hover:text-[#
+#040414] transition duration-500 ease-in-out transform hover:scale-110 hover:shadow-lg hover:shadow-[#
+#040414]">
                                 {homeDetail?.homeDetail[0].logoText
                                 }
 
@@ -144,7 +146,7 @@ export default function Home({ homeDetail }) {
 
                     <Link
                         href="#contactss"
-                        className="bg-[#0063ad] text-white text-sm font-semibold px-5 py-3 rounded-md shadow-md hover:bg-orange-[#040c49] transition mt-3 xs:mt-5 sm:mt-4 lg:mt-0 md:mt-0 mx-auto md:ml-auto md:mr-0 "
+                        className="bg-[#0063ad] text-white text-sm font-semibold px-5 py-3 rounded-md shadow-md hover:bg-[#040414] transition mt-3 xs:mt-5 sm:mt-4 lg:mt-0 md:mt-0 mx-auto md:ml-auto md:mr-0 "
                     >
                         {homeDetail?.homeDetail[0].buttonText}
                     </Link>
@@ -225,7 +227,7 @@ export default function Home({ homeDetail }) {
                     <div className="grid grid-cols-1 max-w-full w-full  sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto px-6">
 
                         {homeDetail?.services.data.map((service) => (
-                            <div key={service._id} className="bg-gray-800  p-6 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
+                            <div key={service._id} className="bg-gray-800  p-6 rounded-xl shadow-lg hover:bg-[#040414] transform hover:scale-105 transition duration-300">
                                 <div className="text-[#0464af] text-4xl mb-4">
                                 <img src={`data:image/png;base64,${service.image}`} alt="Hero Section"  className="w-12 h-12" />
                                     {/* <Image
@@ -279,7 +281,7 @@ export default function Home({ homeDetail }) {
       {/* Certificate Image */}
       <div className="flex-shrink-0">
         <Image
-          src={certificate.image} // Assuming the certificate has an imageUrl field
+          src={certificate?.image} // Assuming the certificate has an imageUrl field
           alt={certificate?.title}
           width={150} // Set width of 150px
           height={150} // Set height of 150px
@@ -316,7 +318,7 @@ export default function Home({ homeDetail }) {
   {homeDetail?.allproject.map((project, index) => (
     <div
       key={index}
-      className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-[#0460a3] hover:text-white p-6 bg-white rounded-lg group"
+      className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-bg-[white] hover:text-white p-6 bg-white rounded-lg group"
     >
       {/* Project Image */}
       <div className="flex-shrink-0">
@@ -326,17 +328,17 @@ export default function Home({ homeDetail }) {
           width={150} // Set width of 150px
           height={150} // Set height of 150px
           loading="lazy"
-          className="w-full max-h-72 object-contain transition-transform duration-300 ease-in-out transform hover:scale-110"
+          className="w-full max-h-72 hover:bg-[white] object-contain transition-transform duration-300 ease-in-out transform hover:scale-110"
         />
       </div>
 
       {/* Project Title */}
-      <strong className="text-lg text-[#0460a3] mt-4 block group-hover:text-white">
+      <strong className="text-lg text-[#0460a3] mt-4 block group-hover:text-[#0460a3]">
         {project.title}
       </strong>
 
       {/* Project Description */}
-      <p className="mt-2 text-gray-500 hover:text-white group-hover:text-white">{project.description}</p>
+      <p className="mt-2 text-[#040414] hover:text-#000 group-hover:text-[#040414]">{project.description}</p>
     </div>
   ))}
 </div>
@@ -436,7 +438,7 @@ export default function Home({ homeDetail }) {
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="bg-[#041c5c] text-white font-semibold text-lg py-3 px-6 rounded-md hover:bg-[#041c5c] transition"
+                                    className="bg-[#041c5c] text-white font-semibold text-lg py-3 px-6 rounded-md hover:bg-[#040414] transition"
                                 >
                                     {loading ? "Sending..." : "Start your project!"}
                                 </button>
@@ -473,9 +475,9 @@ export default function Home({ homeDetail }) {
                         <div className="mt-6 text-gray-300 text-sm">
                             <p><strong>{homeDetail?.footer.data.subtitle
                             }</strong></p>
-                            <p>📧 Email: <Link href={`mailto:${homeDetail?.footer.data.email}`} className="text-orange-400 hover:underline">{homeDetail?.footer.data.email}</Link></p>
-                            <p>📞 Phone: <Link href={`tel:${homeDetail?.footer.data.phone}`} className="text-orange-400 hover:underline">{homeDetail?.footer.data.phone}</Link></p>
-                            <p>🌍 LinkedIn: <Link href={homeDetail?.footer.data.linkedin} target="_blank" className="text-orange-400 hover:underline">{homeDetail?.footer.data.linkedin}</Link></p>
+                            <p>📧 Email: <Link href={`mailto:${homeDetail?.footer.data.email}`} className="text-white hover:underline">{homeDetail?.footer.data.email}</Link></p>
+                            <p>📞 Phone: <Link href={`tel:${homeDetail?.footer.data.phone}`} className="text-white hover:underline">{homeDetail?.footer.data.phone}</Link></p>
+                            <p>🌍 LinkedIn: <Link href={homeDetail?.footer.data.linkedin} target="_blank" className="text-white hover:underline">{homeDetail?.footer.data.linkedin}</Link></p>
                         </div>
 
                         {/* Social Icons */}
@@ -495,7 +497,7 @@ export default function Home({ homeDetail }) {
 
                         {/* Copyright */}
                         <div className="mt-4 text-gray-400 text-xs">
-                            <p>{homeDetail?.footer.data.copyright} <Link href="https://sharplogicians.com/" className="text-orange-400 hover:underline"> {homeDetail?.footer.data.companyName}</Link></p>
+                            <p>{homeDetail?.footer.data.copyright} <Link href="https://sharplogicians.com/" className="text-[#498f96] font-extrabold hover:underline"> {homeDetail?.footer.data.companyName}</Link></p>
                         </div>
                     </div>
                 </footer>
