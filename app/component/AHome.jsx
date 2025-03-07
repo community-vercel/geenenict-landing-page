@@ -116,6 +116,7 @@ export default function Home({ homeDetail }) {
             <meta name="twitter:description" content={metadata.twitter.description} />
             <meta name="twitter:image" content={metadata.twitter.images} />
             <div >
+                
                 <header className="bg-gradient-to-b from-gray-300 to-white py-4 px-6 flex items-center justify-between flex-wrap">
                     {/* Logo */}
                     <div className="flex items-center justify-center gap-4 mx-auto lg:mx-0">
