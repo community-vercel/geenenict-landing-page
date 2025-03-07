@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 
 const Footer = () => {
   const [footer, setFooter] = useState(null);
-  const [message, setMessage] = useState({ type: "", text: "" }); // State for messages
+  const [message, setMessage] = useState({ type: "", text: "" });
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     address: "",
@@ -15,7 +16,10 @@ const Footer = () => {
     copyright: "",
   });
 
-  // Fetch Footer Data
+  useEffect(() => {
+    fetchFooter();
+  }, []);
+
   const fetchFooter = async () => {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}footer/get`);
@@ -25,49 +29,49 @@ const Footer = () => {
         setFooter(filteredData);
         setFormData(filteredData);
       } else {
-        setMessage({ type: "error", text: "Failed to fetch footer data." });
+        showMessage("error", "Failed to fetch footer data.");
       }
-    } catch (error) {
-      setMessage({ type: "error", text: "Error fetching footer." });
+    } catch {
+      showMessage("error", "Error fetching footer.");
     }
   };
 
-  useEffect(() => {
-    fetchFooter();
-  }, []);
-
-  // Handle Input Change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Create or Update Footer
   const handleSubmit = async (method, endpoint, successMessage, errorMessage) => {
+    setLoading(true);
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}footer/${endpoint}`, {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+
+      setLoading(false);
       if (response.ok) {
-        setMessage({ type: "success", text: successMessage });
+        showMessage("success", successMessage);
         setTimeout(fetchFooter, 500);
       } else {
-        setMessage({ type: "error", text: errorMessage });
+        showMessage("error", errorMessage);
       }
     } catch {
-      setMessage({ type: "error", text: errorMessage });
+      setLoading(false);
+      showMessage("error", errorMessage);
     }
   };
 
-  // Delete Footer
   const handleDelete = async () => {
+    setLoading(true);
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_FRONT_URL}footer/delete`, {
         method: "DELETE",
       });
+
+      setLoading(false);
       if (response.ok) {
-        setMessage({ type: "success", text: "Footer deleted successfully!" });
+        showMessage("success", "Footer deleted successfully!");
         setFooter(null);
         setFormData({
           title: "",
@@ -81,15 +85,21 @@ const Footer = () => {
           copyright: "",
         });
       } else {
-        setMessage({ type: "error", text: "Error deleting footer." });
+        showMessage("error", "Error deleting footer.");
       }
     } catch {
-      setMessage({ type: "error", text: "Error deleting footer." });
+      setLoading(false);
+      showMessage("error", "Error deleting footer.");
     }
   };
 
+  const showMessage = (type, text) => {
+    setMessage({ type, text });
+    setTimeout(() => setMessage({ type: "", text: "" }), 2000);
+  };
+
   return (
-    <div className="p-6 max-w-3xl mx-auto bg-white rounded-lg">
+    <div className="p-6 max-w-3xl mx-auto bg-white rounded-lg shadow-md">
       <h2 className="text-xl font-semibold mb-4">Footer Management</h2>
 
       {/* Message Display */}
@@ -125,22 +135,28 @@ const Footer = () => {
         {!footer ? (
           <button
             onClick={() => handleSubmit("POST", "create", "Footer created successfully!", "Error creating footer.")}
-            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 flex items-center gap-2"
+            disabled={loading}
           >
+            {loading && <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>}
             Add Footer
           </button>
         ) : (
           <>
             <button
               onClick={() => handleSubmit("PUT", "update", "Footer updated successfully!", "Error updating footer.")}
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 flex items-center gap-2"
+              disabled={loading}
             >
+              {loading && <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>}
               Update Footer
             </button>
             <button
               onClick={handleDelete}
-              className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+              className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 flex items-center gap-2"
+              disabled={loading}
             >
+              {loading && <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>}
               Delete Footer
             </button>
           </>

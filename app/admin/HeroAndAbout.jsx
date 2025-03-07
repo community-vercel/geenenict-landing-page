@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const HeroAndAbout = () => {
@@ -14,6 +14,9 @@ const HeroAndAbout = () => {
   const [expertise, setExpertise] = useState("");
   const [description, setDescription] = useState("");
   const [editingId, setEditingId] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState({ text: "", type: "" });
+  const [hasData, setHasData] = useState(false); // Track if data already exists
 
   useEffect(() => {
     fetchData();
@@ -28,11 +31,22 @@ const HeroAndAbout = () => {
       console.log("Fetched Data:", result);
       if (response.ok) {
         setData(result);
+        if (result.length > 0) {
+          setHasData(true); // Data exists, so set hasData to true
+          setHeader(result[0].header || "");
+          setTitle(result[0].title || "");
+          setSubtitle(result[0].subtitle || "");
+          setSubsubtitle(result[0].subsubtitle || "");
+          setWhoIAm(result[0].whoIAm || "");
+          setExpertise(result[0].expertise || "");
+          setDescription(result[0].description || "");
+          setEditingId(result[0]._id); // Set editingId to the existing item's ID
+        }
       } else {
-        toast.error(result.message || "Failed to fetch data.");
+        setMessage({ text: result.message || "Failed to fetch data.", type: "error" });
       }
     } catch (error) {
-      toast.error("Error fetching data!");
+      setMessage({ text: "Error fetching data!", type: "error" });
     }
   };
   
@@ -47,7 +61,7 @@ const HeroAndAbout = () => {
   // Submit or update data
   const handleSubmit = async () => {
     if (!header || !title || !subtitle || !subsubtitle || !description || !whoIAm || !expertise) {
-      toast.error("All fields are required!");
+      setMessage({ text: "All fields are required!", type: "error" });
       return;
     }
   
@@ -64,9 +78,9 @@ const HeroAndAbout = () => {
       formData.append("image", selectedFile);
     }
   
+    setLoading(true);
     try {
       const url = editingId
-      
         ? `${process.env.NEXT_PUBLIC_DJANGO_URLS}herosection/update/${editingId}`
         : `${process.env.NEXT_PUBLIC_DJANGO_URLS}herosection/post`;
   
@@ -81,15 +95,18 @@ const HeroAndAbout = () => {
       console.log("Server Response:", result); 
   
       if (response.ok) {
-        toast.success(editingId ? "Updated successfully!" : "Added successfully!");
+        setMessage({ text: editingId ? "Updated successfully!" : "Added successfully!", type: "success" });
         fetchData();
         resetForm();
       } else {
-        toast.error(result.message || "Operation failed!");
+        setMessage({ text: result.message || "Operation failed!", type: "error" });
       }
     } catch (error) {
       console.error("Error submitting data:", error);
-      toast.error("Error submitting data!");
+      setMessage({ text: "Error submitting data!", type: "error" });
+    } finally {
+      setLoading(false);
+      setTimeout(() => setMessage({ text: "", type: "" }), 2000);
     }
   };
   
@@ -104,13 +121,16 @@ const HeroAndAbout = () => {
 
       const result = await response.json();
       if (response.ok) {
-        toast.success("Deleted successfully!");
+        setMessage({ text: "Deleted successfully!", type: "success" });
         fetchData();
+        setHasData(false); // Reset hasData after deletion
       } else {
-        toast.error(result.message || "Failed to delete!");
+        setMessage({ text: result.message || "Failed to delete!", type: "error" });
       }
     } catch (error) {
-      toast.error("Error deleting record!");
+      setMessage({ text: "Error deleting record!", type: "error" });
+    } finally {
+      setTimeout(() => setMessage({ text: "", type: "" }), 2000);
     }
   };
 
@@ -176,9 +196,30 @@ const HeroAndAbout = () => {
       <Editor apiKey={process.env.NEXT_PUBLIC_API_KEY} init={{ placeholder: "Key Expertise..." }} onEditorChange={(newValue) => setExpertise(newValue)} value={expertise} />
 
       {/* Submit Button */}
-      <button onClick={handleSubmit} className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
-        {editingId ? "Update" : "Submit"}
+      <button
+        onClick={handleSubmit}
+        className={`w-full ${
+          hasData ? "bg-yellow-500 hover:bg-yellow-600" : "bg-blue-500 hover:bg-blue-600"
+        } text-white font-bold py-2 px-4 rounded flex items-center justify-center`}
+        disabled={loading}
+      >
+        {loading ? (
+          <div className="flex items-center justify-center">
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+          </div>
+        ) : hasData ? "Update" : "Submit"}
       </button>
+
+      {/* Message Display */}
+      {message.text && (
+        <div
+          className={`mt-2 py-2.5 text-center text-white font-medium rounded-md shadow-md transition-opacity duration-500 ${
+            message.type === "success" ? "bg-green-600" : "bg-red-600"
+          }`}
+        >
+          {message.text}
+        </div>
+      )}
 
       {/* Display Data */}
       <h2 className="text-lg font-bold mt-6">Saved Data</h2>
@@ -187,8 +228,7 @@ const HeroAndAbout = () => {
           data.map((item) => (
             <div key={item._id} className="border p-4 rounded shadow-md flex justify-between items-center">
               <div>
-
-               <div className="" dangerouslySetInnerHTML={{ __html:item.title}} />
+                <div className="" dangerouslySetInnerHTML={{ __html: item.title }} />
                 <p><strong>Header:</strong> {item.header}</p>
                 <p><strong>Subtitle:</strong> {item.subtitle}</p>
               </div>

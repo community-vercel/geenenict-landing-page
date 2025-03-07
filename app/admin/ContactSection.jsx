@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 
 const ContactSection = () => {
   const [contact, setContact] = useState(null);
-  const [message, setMessage] = useState({ type: "", text: "" }); // State for messages
+  const [message, setMessage] = useState({ type: "", text: "" }); // Success/Error Message
+  const [loading, setLoading] = useState(false); // Loading State
   const [formData, setFormData] = useState({
     title: "",
     image: null, // File input for image
@@ -30,6 +31,14 @@ const ContactSection = () => {
     fetchContact();
   }, []);
 
+  // Auto-clear message after 2 seconds
+  useEffect(() => {
+    if (message.text) {
+      const timer = setTimeout(() => setMessage({ type: "", text: "" }), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
   // Handle Input Change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,6 +51,7 @@ const ContactSection = () => {
 
   // Handle Create
   const handleCreate = async () => {
+    setLoading(true);
     const formDataToSend = new FormData();
     formDataToSend.append("title", formData.title);
     if (formData.image) formDataToSend.append("image", formData.image);
@@ -60,12 +70,15 @@ const ContactSection = () => {
       }
     } catch {
       setMessage({ type: "error", text: "Error creating contact section." });
+    } finally {
+      setLoading(false);
     }
   };
 
   // Handle Update
   const handleUpdate = async () => {
     if (!contact) return;
+    setLoading(true);
 
     const formDataToSend = new FormData();
     formDataToSend.append("title", formData.title);
@@ -85,12 +98,15 @@ const ContactSection = () => {
       }
     } catch {
       setMessage({ type: "error", text: "Error updating contact section." });
+    } finally {
+      setLoading(false);
     }
   };
 
   // Handle Delete
   const handleDelete = async () => {
     if (!contact) return;
+    setLoading(true);
 
     try {
       const response = await fetch(`${baseUrl}/delete/${contact._id}`, {
@@ -106,6 +122,8 @@ const ContactSection = () => {
       }
     } catch {
       setMessage({ type: "error", text: "Error deleting contact section." });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -113,11 +131,13 @@ const ContactSection = () => {
     <div className="p-6 max-w-xl mx-auto bg-white shadow-md rounded-lg">
       <h2 className="text-xl font-semibold mb-4">Contact Section</h2>
 
-      {/* Message Display */}
+      {/* Success/Error Message Below Contact Section */}
       {message.text && (
         <div
-          className={`p-2 mb-4 text-sm rounded-md ${
-            message.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+          className={`w-full p-2 mb-4 text-sm text-center font-medium rounded-md ${
+            message.type === "success"
+              ? "bg-green-500 text-white"
+              : "bg-red-500 text-white"
           }`}
         >
           {message.text}
@@ -154,23 +174,38 @@ const ContactSection = () => {
         {!contact ? (
           <button
             onClick={handleCreate}
-            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 flex items-center justify-center"
+            disabled={loading}
           >
-            Add Contact Section
+            {loading ? (
+              <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+            ) : (
+              "Add Contact Section"
+            )}
           </button>
         ) : (
           <>
             <button
               onClick={handleUpdate}
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 flex items-center justify-center"
+              disabled={loading}
             >
-              Update Contact Section
+              {loading ? (
+                <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              ) : (
+                "Update Contact Section"
+              )}
             </button>
             <button
               onClick={handleDelete}
-              className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+              className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 flex items-center justify-center"
+              disabled={loading}
             >
-              Delete Contact Section
+              {loading ? (
+                <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              ) : (
+                "Delete Contact Section"
+              )}
             </button>
           </>
         )}

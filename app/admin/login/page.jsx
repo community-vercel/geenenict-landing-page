@@ -1,14 +1,15 @@
-'use client'
+'use client';
 import React, { useState } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import styles
 import { useRouter } from "next/navigation";
+
 const Login = () => {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false); // Loading state
 
-  const router=useRouter()
+  const router = useRouter();
+
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
@@ -16,6 +17,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true); // Start loading
 
     try {
       const response = await axios.post(
@@ -25,22 +27,19 @@ const Login = () => {
       );
 
       console.log(response.data);
-      toast.success("Login Successful! 🚀", { position: "top-right" });
 
+      // Redirect to dashboard after successful login
       setTimeout(() => {
         router.push("/admin/dashboard");
       }, 200);
-      
     } catch (err) {
+      setLoading(false); // Stop loading
       setError(err.response?.data?.message || "Login failed. Try again.");
-      toast.error(err.response?.data?.message || "Login failed. Try again.", { position: "top-right" });
     }
   };
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
-      <ToastContainer /> {/* Toast Notification Container */}
-      
       {/* Left Side - Image */}
       <div className="hidden md:flex w-full md:w-1/2 bg-gray-200">
         <img
@@ -86,9 +85,36 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+              className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition flex items-center justify-center gap-2"
+              disabled={loading}
             >
-              Login
+              {loading ? (
+                <>
+                  <svg
+                    className="animate-spin h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 11-8 8z"
+                    ></path>
+                  </svg>
+                  <span>Loading...</span>
+                </>
+              ) : (
+                "Login"
+              )}
             </button>
           </form>
         </div>

@@ -6,7 +6,6 @@ import { useState, useEffect } from 'react';
 import { H1, H2, H3, H4, H5 } from './Typrography';
 
 export default function Home({ homeDetail }) {
-    console.log(homeDetail)
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -116,31 +115,36 @@ export default function Home({ homeDetail }) {
             <meta name="twitter:description" content={metadata.twitter.description} />
             <meta name="twitter:image" content={metadata.twitter.images} />
             <div >
-                
-                <header className="bg-gradient-to-b from-gray-300 to-white py-4 px-6 flex items-center justify-between flex-wrap">
+
+                <header className="bg-gradient-to-b from-gray-300 to-white py-0 px-6 flex items-center justify-between flex-wrap">
                     {/* Logo */}
                     <div className="flex items-center justify-center gap-4 mx-auto lg:mx-0">
+                    <Link href="/">
                         {homeDetail?.homeDetail[0].logo ?
+                       
                             <Image
-                                src={`data:image/png;base64,${homeDetail?.homeDetail[0].logo}`} 
+                                src={`${homeDetail?.homeDetail[0].logo}`} 
                                 alt="Frans Geenen"
-                                width={1000}
-                                height={1000}
+                                width={48}
+                                height={48}
                                 priority
-                                className="rounded-full object-cover w-full h-full"
+                                className="rounded-full object-contain w-24 h-24"
                             />
-                            : <span className="text-5xl font-extrabold text-[#3D4A46] tracking-tight hover:text-orange-500 transition duration-500 ease-in-out transform hover:scale-110 hover:shadow-lg hover:shadow-orange-400">
+                            
+                      
+                            : <span className="text-5xl font-extrabold text-[#3D4A46] tracking-tight hover:text-[#040c49] transition duration-500 ease-in-out transform hover:scale-110 hover:shadow-lg hover:shadow-orange-400">
                                 {homeDetail?.homeDetail[0].logoText
                                 }
 
                             </span>
 
                         }
+                          </Link>
                     </div>
 
                     <Link
                         href="#contactss"
-                        className="bg-orange-500 text-white text-sm font-semibold px-5 py-3 rounded-md shadow-md hover:bg-orange-600 transition mt-3 xs:mt-5 sm:mt-4 lg:mt-0 md:mt-0 mx-auto md:ml-auto md:mr-0 "
+                        className="bg-[#0063ad] text-white text-sm font-semibold px-5 py-3 rounded-md shadow-md hover:bg-orange-[#040c49] transition mt-3 xs:mt-5 sm:mt-4 lg:mt-0 md:mt-0 mx-auto md:ml-auto md:mr-0 "
                     >
                         {homeDetail?.homeDetail[0].buttonText}
                     </Link>
@@ -174,13 +178,13 @@ export default function Home({ homeDetail }) {
 
 
                     {/* Name and Subtitle */}
-                    <H2 className="text-2xl md:text-3xl font-semibold text-orange-500 mt-8 animate-fade-in">
+                    <H2 className="text-2xl md:text-3xl font-semibold text-[#0464af] mt-8 animate-fade-in">
                         {homeDetail && homeDetail?homeDetail?.sliders[0].subtitle:'Welcome to Digidaal'}   </H2>
                     <H3 className="italic text-gray-600">{homeDetail && homeDetail?homeDetail?.sliders[0].subsubtitle:'Nice to meet you!'}          </H3>
                 </section>
 
-                <section className="bg-[#3D4A46] text-white mb-6 min-h-screen/2">
-                    <div className="container max-w-full w-full  mx-auto text-center py-7 px-6 bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-lg">
+                <section className="bg-[#041c5c] text-white mb-6 min-h-screen/2">
+                    <div className="container max-w-full w-full  mx-auto text-center py-7 px-6 bg-[#041c5c] rounded-2xl shadow-lg">
                         <div className="container max-w-full w-6xl   mx-auto text-center py-2 px-6 bg-gradient-to-b from-gray-900 to-gray-800 rounded-2xl shadow-lg">
 
                             <H3 className="max-w-full w-full  min-h-screen/2  mx-auto text-gray-300 text-lg leading-relaxed"
@@ -214,15 +218,15 @@ export default function Home({ homeDetail }) {
                     </div>
                 </section>
 
-                <div className="bg-gradient-to-b from-gray-900 to-gray-800 text-white py-16">
+                <div className="bg-[#041c5c] text-white py-16">
                     <H2 className="text-center text-4xl font-bold mb-12">
-                        My <span className="text-orange-500">Services</span>
+                        My <span className="text-[#0464af]">Services</span>
                     </H2>
                     <div className="grid grid-cols-1 max-w-full w-full  sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto px-6">
 
                         {homeDetail?.services.data.map((service) => (
                             <div key={service._id} className="bg-gray-800  p-6 rounded-xl shadow-lg transform hover:scale-105 transition duration-300">
-                                <div className="text-orange-400 text-4xl mb-4">
+                                <div className="text-[#0464af] text-4xl mb-4">
                                 <img src={`data:image/png;base64,${service.image}`} alt="Hero Section"  className="w-12 h-12" />
                                     {/* <Image
                                         src={serverurl.replace('/api/', '') + service.image} alt={service.title}
@@ -232,7 +236,7 @@ export default function Home({ homeDetail }) {
                                         className="w-12 h-12" /> */}
                                     {/* <img src={serverurl.replace('api/','')+service.image} alt={service.title} className="w-12 h-12" /> */}
                                 </div>
-                                <h3 className="text-xl font-semibold text-orange-400">
+                                <h3 className="text-xl font-semibold text-[#0464af]">
                                     {service.title}
                                 </h3>
                                 <div
@@ -247,9 +251,9 @@ export default function Home({ homeDetail }) {
                 </div>
 
                 {/* <hr className="h-px my-8 bg-red-500 border-0 dark:bg-gray-700" /> */}
-                <section className="bg-[#3D4A46] text-white py-8 mt-2 lg:mt-8">
+                <section className="bg-[#041c5c] text-white py-8 mt-2 lg:mt-8">
 
-                    <div className="mx-auto text-center px-6 py-4 lg:py-14 bg-gradient-to-r from-[#2C3E50] to-[#34495E] rounded-lg shadow-lg ">
+                    <div className="mx-auto text-center px-6 py-4 lg:py-14  rounded-lg shadow-lg ">
                         <div
 
                             dangerouslySetInnerHTML={{ __html: homeDetail?.workmethod[0].description }}
@@ -259,46 +263,83 @@ export default function Home({ homeDetail }) {
 
                     </div>
                 </section>
-                <section className="py-8 bg-gradient-to-b from-[#2C3E50] to-[#34495E] mt-6">
+                <hr className="h-px my-8 bg-[#0460a3] border-0 dark:bg-gray-700" />
+                 <section className="py-8 bg-white">
+      <div className="max-w-6xl mx-auto text-center px-6">
+        {/* Heading */}
+        <H4 className="text-2xl font-extrabold text-gray-700 tracking-wide">
+          Some companies I am happy to have collaborated with:
+        </H4>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-5 sm:mt-5 px-6">
+  {homeDetail?.certificate.map((certificate, index) => (
+    <div
+      key={index}
+      className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-[#0460a3] hover:text-white p-6 bg-white rounded-lg group"
+    >
+      {/* Certificate Image */}
+      <div className="flex-shrink-0">
+        <Image
+          src={certificate.image} // Assuming the certificate has an imageUrl field
+          alt={certificate?.title}
+          width={150} // Set width of 150px
+          height={150} // Set height of 150px
+          loading="lazy"
+          className="w-full max-h-72 object-contain transition-transform duration-300 ease-in-out transform hover:scale-110"
+        />
+      </div>
+
+      {/* Certificate Title */}
+      <strong className="text-lg text-orange-500 mt-4 block group-hover:text-white">
+        {certificate.title}
+      </strong>
+
+      {/* Certificate Description */}
+      <p className="mt-2 text-gray-500 hover:text-white">{certificate.description}</p>
+    </div>
+  ))}
+</div>
+</div>
+</section>
+
+                <section className="py-8 bg-[#041c5c] mt-6">
 
 
                     {/* Recent Projects Title */}
                     <div className="text-white  ">
                         <H2 className="text-3xl lg:text-4xl md:text-5xl sm:text:2xl xs:tex font-extrabold tracking-tight text-center mb-0 lg:mb-10">
-                            My Recent <span className="text-orange-500">Projects</span>
+                            My Recent <span className="text-[#0464af]">Projects</span>
                         </H2>
                     </div>
 
                     {/* Project List */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 sm:mt-5 px-6">
-      {homeDetail?.allproject.map((project, index) => (
-        <div
-          key={index}
-          className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-[#1E2A33] hover:text-white p-6 bg-white rounded-lg"
-        >
-          {/* Project Image */}
-          <div className="relative w-full h-56 rounded-lg overflow-hidden">
-          <img src={`data:image/png;base64,${project.image}`} alt="Hero Section"  className="w-12 h-12" />
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 sm:mt-5 px-6 hover:text-white">
+  {homeDetail?.allproject.map((project, index) => (
+    <div
+      key={index}
+      className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-[#0460a3] hover:text-white p-6 bg-white rounded-lg group"
+    >
+      {/* Project Image */}
+      <div className="flex-shrink-0">
+        <Image
+          src={project.image} // Assuming the project has an imageUrl field
+          alt={project?.title}
+          width={150} // Set width of 150px
+          height={150} // Set height of 150px
+          loading="lazy"
+          className="w-full max-h-72 object-contain transition-transform duration-300 ease-in-out transform hover:scale-110"
+        />
+      </div>
 
-            <Image
-            
-              src={`data:image/png;base64,${project.image}`} // Assuming the project has an `imageUrl` field
-              alt={project?.title}
-              layout="fill"
-              objectFit="cover"
-              className="rounded-lg"
-            />
-          </div>
+      {/* Project Title */}
+      <strong className="text-lg text-[#0460a3] mt-4 block group-hover:text-white">
+        {project.title}
+      </strong>
 
-          {/* Project Title */}
-          <strong className="text-lg text-orange-500 mt-4 block">{project.title}</strong>
-
-          {/* Project Description */}
-          <p className="mt-2 text-gray-500 hover:text-white">{project.description}</p>
-        </div>
-      ))}
+      {/* Project Description */}
+      <p className="mt-2 text-gray-500 hover:text-white group-hover:text-white">{project.description}</p>
     </div>
-
+  ))}
+</div>
 
 
 
@@ -395,7 +436,7 @@ export default function Home({ homeDetail }) {
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="bg-orange-500 text-white font-semibold text-lg py-3 px-6 rounded-md hover:bg-orange-600 transition"
+                                    className="bg-[#041c5c] text-white font-semibold text-lg py-3 px-6 rounded-md hover:bg-[#041c5c] transition"
                                 >
                                     {loading ? "Sending..." : "Start your project!"}
                                 </button>
@@ -409,7 +450,7 @@ export default function Home({ homeDetail }) {
                     </div>
                 </section>
 
-                <footer className="bg-[#2C3E50] text-white text-center py-12">
+                <footer className="bg-[#041c5c] text-white text-center py-12">
                     <div className="max-w-6xl mx-auto px-6">
                         {/* Quote */}
                         <p className="italic text-xl text-gray-300 mb-6">

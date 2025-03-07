@@ -12,6 +12,8 @@ const ENDPOINTS = {
   footer: "footer/get",
   seo: "metadata/get",
 
+  certificate: "clients/getAll",
+
 
 };
 
