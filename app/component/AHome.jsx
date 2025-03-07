@@ -435,7 +435,7 @@ export default function Home({ homeDetail }) {
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="bg-[#041c5c] text-white font-semibold text-lg py-3 px-6 rounded-md hover:bg-[#040414] transition"
+                                    className="bg-[#0063ad]  text-white font-semibold text-lg py-3 px-6 rounded-md hover:bg-[#040414] transition"
                                 >
                                     {loading ? "Sending..." : "Start your project!"}
                                 </button>
