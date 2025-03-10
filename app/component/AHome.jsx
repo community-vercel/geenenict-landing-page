@@ -301,7 +301,7 @@ console.log(homeDetail)
                                     key={index}
                                     className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-[#0460a3] hover:text-white p-6 bg-white rounded-lg group"
                                 >
-                                    <Link href={certificate?.link} target="_blank" rel="noopener noreferrer">
+                                    <Link href={certificate?.link}  target={certificate.link!=''?"_blank":''} rel="noopener noreferrer">
                                     {/* Certificate Image */}
                                     <div className="flex-shrink-0">
                                         <Image
