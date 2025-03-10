@@ -6,7 +6,7 @@ const ContactSection = () => {
   const [loading, setLoading] = useState(false); // Loading State
   const [formData, setFormData] = useState({
     title: "",
-    image: null, // File input for image
+    image: "", // Base64 string for image
   });
 
   const baseUrl = `${process.env.NEXT_PUBLIC_FRONT_URL}contact-section`;
@@ -18,7 +18,7 @@ const ContactSection = () => {
       const data = await response.json();
       if (response.ok && data.length > 0) {
         setContact(data[0]);
-        setFormData({ title: data[0].title, image: null });
+        setFormData({ title: data[0].title, image: data[0].image }); // Set Base64 image
       } else {
         setMessage({ type: "error", text: "No contact section found." });
       }
@@ -44,22 +44,34 @@ const ContactSection = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle Image Upload
+  // Handle Image Upload (Convert to Base64)
   const handleFileChange = (e) => {
-    setFormData({ ...formData, image: e.target.files[0] });
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData({ ...formData, image: reader.result }); // Set Base64 string
+      };
+      reader.readAsDataURL(file); // Convert file to Base64
+    }
   };
 
   // Handle Create
   const handleCreate = async () => {
     setLoading(true);
-    const formDataToSend = new FormData();
-    formDataToSend.append("title", formData.title);
-    if (formData.image) formDataToSend.append("image", formData.image);
+
+    const payload = {
+      title: formData.title,
+      image: formData.image, // Base64 string
+    };
 
     try {
       const response = await fetch(`${baseUrl}/post`, {
         method: "POST",
-        body: formDataToSend,
+        headers: {
+          "Content-Type": "application/json", // Send as JSON
+        },
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
@@ -77,26 +89,44 @@ const ContactSection = () => {
 
   // Handle Update
   const handleUpdate = async () => {
-    if (!contact) return;
+    if (!contact || !contact._id) {
+      setMessage({ type: "error", text: "Invalid contact ID." });
+      return;
+    }
     setLoading(true);
 
-    const formDataToSend = new FormData();
-    formDataToSend.append("title", formData.title);
-    if (formData.image) formDataToSend.append("image", formData.image);
+    const payload = {
+      title: formData.title,
+      image: formData.image, // Base64 string
+    };
 
     try {
       const response = await fetch(`${baseUrl}/update/${contact._id}`, {
         method: "PUT",
-        body: formDataToSend,
+        headers: {
+          "Content-Type": "application/json", // Send as JSON
+        },
+        body: JSON.stringify(payload),
       });
+
+      // console.log("Update Response:", response); // Log the response
 
       if (response.ok) {
         setMessage({ type: "success", text: "Contact section updated successfully!" });
         fetchContact();
       } else {
-        setMessage({ type: "error", text: "Error updating contact section." });
+        const text = await response.text();
+        try {
+          const errorData = JSON.parse(text); // Try to parse as JSON
+          console.error("Update Error:", errorData);
+          setMessage({ type: "error", text: errorData.message || "Error updating contact section." });
+        } catch {
+          console.error("Update Error (Non-JSON):", text);
+          setMessage({ type: "error", text: "Server returned an error. Check the logs." });
+        }
       }
-    } catch {
+    } catch (error) {
+      console.error("Update Error:", error);
       setMessage({ type: "error", text: "Error updating contact section." });
     } finally {
       setLoading(false);
@@ -105,7 +135,10 @@ const ContactSection = () => {
 
   // Handle Delete
   const handleDelete = async () => {
-    if (!contact) return;
+    if (!contact || !contact._id) {
+      setMessage({ type: "error", text: "Invalid contact ID." });
+      return;
+    }
     setLoading(true);
 
     try {
@@ -113,14 +146,19 @@ const ContactSection = () => {
         method: "DELETE",
       });
 
+      console.log("Delete Response:", response); // Log the response
+
       if (response.ok) {
         setMessage({ type: "success", text: "Contact section deleted successfully!" });
         setContact(null);
-        setFormData({ title: "", image: null });
+        setFormData({ title: "", image: "" });
       } else {
+        const errorData = await response.json(); // Log error details
+        console.error("Delete Error:", errorData);
         setMessage({ type: "error", text: "Error deleting contact section." });
       }
-    } catch {
+    } catch (error) {
+      console.error("Delete Error:", error);
       setMessage({ type: "error", text: "Error deleting contact section." });
     } finally {
       setLoading(false);
@@ -166,6 +204,13 @@ const ContactSection = () => {
             onChange={handleFileChange}
             className="p-2 border rounded-md"
           />
+          {formData.image && (
+            <img
+              src={formData.image}
+              alt="Preview"
+              className="mt-4 w-full h-40 object-cover rounded-lg"
+            />
+          )}
         </div>
       </div>
 
