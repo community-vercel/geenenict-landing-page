@@ -23,6 +23,7 @@ import { FaLaptopFile } from "react-icons/fa6";
 import { AiOutlineWechatWork } from "react-icons/ai";
 import { GrContact } from "react-icons/gr";
 import { FcCollaboration } from "react-icons/fc";
+import { PiCertificateThin } from "react-icons/pi";
 import { useRouter } from "next/navigation";
 
 import NavbarPage from "../NavbarPage";
@@ -72,7 +73,7 @@ const Dashboard = () => {
     { name: "Project Section", icon: <BsCardHeading /> },
     { name: "Projects", icon: <GoProjectSymlink /> },
     { name: "Footer", icon: <MdOutlineBorderBottom /> },
-    { name: "Certified", icon: <FcCollaboration /> },
+    { name: "Certified", icon: <PiCertificateThin /> },
         { name: "Contact", icon: <MdContactMail /> },
     { name: "Requests", icon: <GrContact /> },
     { name: "SEO", icon: <MdDataSaverOff /> },
