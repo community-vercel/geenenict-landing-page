@@ -547,7 +547,7 @@ export default function Home({ homeDetail }) {
 
                         {/* Copyright */}
                         <div className="mt-4 text-gray-400 text-xs">
-                            <p>{homeDetail?.footer.data.copyright} <Link href="https://sharplogicians.com/" className="text-[#498f96] font-extrabold hover:underline"> {homeDetail?.footer.data.companyName}</Link></p>
+                            <p>{homeDetail?.footer.data.copyright} <Link href="https://plenbright.com/" className="text-[#498f96] font-extrabold hover:underline"> Plenbright B.V.</Link></p>
                         </div>
                     </div>
                 </footer>
