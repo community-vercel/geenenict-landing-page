@@ -199,8 +199,8 @@ console.log(homeDetail)
                         <H3 className="italic text-gray-600 text-3xl font-semibold transform transition-all duration-300 hover:scale-105 hover:text-[#0464af] relative group">
   <span className="relative z-10">
     {homeDetail && homeDetail?.sliders[0]?.subsubtitle 
-      ? `“ ${homeDetail.sliders[0].subsubtitle} ”`
-      : '"Nice to meet you!"'}
+      ? ` ${homeDetail.sliders[0].subsubtitle} ”`
+      : '"Nice to meet you!'}
   </span>
   
   <span className="absolute inset-0 border-b-2 border-transparent transition-all duration-300"></span>
@@ -398,7 +398,6 @@ console.log(homeDetail)
                             {homeDetail?.contact[0].title}
 
                         </h2>
-
                         {/* Form */}
                         <form onSubmit={handleSubmit} className="mt-8" id="contact">
                             {/* Name Fields */}
