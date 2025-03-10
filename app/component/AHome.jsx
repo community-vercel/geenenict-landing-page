@@ -4,8 +4,13 @@ import Image from "next/image";
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { H1, H2, H3, H4, H5 } from './Typrography';
+import { FaLinkedin } from 'react-icons/fa';
+import { MdEmail } from 'react-icons/md';
+import { BsPhoneFill } from 'react-icons/bs';
 
 export default function Home({ homeDetail }) {
+
+    console.log("homeDetail", homeDetail);
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -130,12 +135,13 @@ export default function Home({ homeDetail }) {
                             {homeDetail?.homeDetail[0].logo ?
 
                                 <Image
+
                                     src={`${homeDetail?.homeDetail[0].logo}`}
                                     alt="Frans Geenen"
-                                    width={48}
-                                    height={48}
+                                    width={56}
+                                    height={56}
                                     priority
-                                    className="rounded-full object-contain w-24 h-24"
+                                    className="rounded-full object-contain w-32 h-32"
                                 />
 
 
@@ -162,18 +168,19 @@ export default function Home({ homeDetail }) {
                     {/* Title */}
                    
                     <H1
-  className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-700 mt-10 w-full max-w-4xl leading-tight"
+  className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-700 mt-2 w-full  max-w-6xl leading-tight"
   dangerouslySetInnerHTML={{ __html: sanitizedHTML || "Your Specialist in Cloud Security & Application Management" }} />
 
 
                     {/* Avatar Image with Glow Effect */}
                     <div className="relative mt-10">
-                        <div className="w-48 h-48 md:w-52 md:h-52 rounded-full ">
+                        <div className="w-80 h-80 md:w-72 md:h-72 rounded-full ">
                             <Image
-                                src="/brayner_daal.jpeg"
-                                alt="Frans Geenen"
-                                width={200}
-                                height={200}
+
+                                                                    src={`data:image/png;base64,${homeDetail?.sliders[0].image}`}
+                                alt={homeDetail?.sliders[0].subtitle}
+                                width={400}
+                                height={400}
                                 priority
                                 className="rounded-full object-cover w-full h-full"
                             />
@@ -189,7 +196,7 @@ export default function Home({ homeDetail }) {
                     {/* Name and Subtitle */}
                     <H2 className="text-2xl md:text-3xl font-semibold text-[#0464af] mt-8 animate-fade-in">
                         {homeDetail && homeDetail ? homeDetail?.sliders[0].subtitle : 'Welcome to Digidaal'}   </H2>
-                    <H3 className="italic text-gray-600">{homeDetail && homeDetail ? homeDetail?.sliders[0].subsubtitle : 'Nice to meet you!'}          </H3>
+                    <H3 className="italic text-gray-600 text-3xl font-semibold">{homeDetail && homeDetail ? homeDetail?.sliders[0].subsubtitle : 'Nice to meet you!'}          </H3>
                 </section>
 
                 <section className="bg-[#041c5c] text-white mb-6 min-h-[50vh]">  {/* Use a fixed min-height */}
@@ -258,7 +265,7 @@ export default function Home({ homeDetail }) {
                 </div>
 
                 {/* <hr className="h-px my-8 bg-red-500 border-0 dark:bg-gray-700" /> */}
-                <section className="bg-[#041c5c] text-white py-8 mt-2 lg:mt-8">
+                {/* <section className="bg-[#041c5c] text-white py-8 mt-2 lg:mt-8">
 
                     <div className="mx-auto text-center px-6 py-4 lg:py-14  rounded-lg  ">
                         <div
@@ -269,14 +276,14 @@ export default function Home({ homeDetail }) {
 
 
                     </div>
-                </section>
+                </section> */}
 
                 <hr className="h-px my-8 bg-[#0460a3] border-0 dark:bg-gray-700" />
                 <section className="py-8 bg-white">
                     <div className="max-w-6xl mx-auto text-center px-6">
                         {/* Heading */}
                         <H4 className="text-2xl font-extrabold text-gray-700 tracking-wide">
-                            Some companies I am happy to have collaborated with:
+                        Companies I’m Certified By:
                         </H4>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-5 sm:mt-5 px-6">
                             {homeDetail?.certificate.map((certificate, index) => (
@@ -468,24 +475,59 @@ export default function Home({ homeDetail }) {
 
                         {/* Address */}
                         <div className="mt-6 text-gray-300 text-sm">
-                            <p>    {homeDetail?.footer.data.address.slice(0, 20)}
+                            <p>    {homeDetail?.footer.data.address.slice(0, 15)}
                             </p>
-                            <p>    {homeDetail?.footer.data.address.slice(20, 40)}
+                            <p>    {homeDetail?.footer.data.address.slice(15, 34)}
                             </p>
-                            <p>    {homeDetail?.footer.data.address.slice(40, 60)}
+                            <p>    {homeDetail?.footer.data.address.slice(34, 60)}
                             </p>
                             <p>    {homeDetail?.footer.data.address.slice(60, 80)}
                             </p>
                         </div>
 
                         {/* Contact Info */}
-                        <div className="mt-6 text-gray-300 text-sm">
-                            <p><strong>{homeDetail?.footer.data.subtitle
-                            }</strong></p>
-                            <p>📧 Email: <Link href={`mailto:${homeDetail?.footer.data.email}`} className="text-white hover:underline">{homeDetail?.footer.data.email}</Link></p>
-                            <p>📞 Phone: <Link href={`tel:${homeDetail?.footer.data.phone}`} className="text-white hover:underline">{homeDetail?.footer.data.phone}</Link></p>
-                            <p>🌍 LinkedIn: <Link href={`${homeDetail?.footer.data.linkedin}`} rel="noopener noreferrer" target="_blank" className="text-white hover:underline">{homeDetail?.footer.data.linkedin}</Link></p>
-                        </div>
+                        <div className="mt-6 text-gray-300 text-sm text-center flex flex-col items-center space-y-3">
+    {homeDetail?.footer?.data?.subtitle && (
+        <p><strong>{homeDetail.footer.data.subtitle}</strong></p>
+    )}
+
+<div className="flex flex-col items-center space-y-3">
+
+    <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-6 space-y-3 sm:space-y-0">
+        {homeDetail?.footer?.data?.email && (
+            <Link 
+                href={`mailto:${homeDetail.footer.data.email}`} 
+                className="flex items-center space-x-2 text-white hover:text-blue-400 transition duration-300"
+            >
+                <MdEmail className="text-xl" />
+                <span>{homeDetail.footer.data.email}</span>
+            </Link>
+        )}
+
+        {homeDetail?.footer?.data?.phone && (
+            <Link 
+                href={`tel:${homeDetail.footer.data.phone}`} 
+                className="flex items-center space-x-2 text-white hover:text-green-400 transition duration-300"
+            >
+                <BsPhoneFill className="text-xl" />
+                <span>{homeDetail.footer.data.phone}</span>
+            </Link>
+        )}
+
+        {homeDetail?.footer?.data?.linkedin && (
+            <Link 
+                href={homeDetail.footer.data.linkedin} 
+                rel="noopener noreferrer" 
+                target="_blank" 
+                className="flex items-center space-x-2 text-white hover:text-blue-500 transition duration-300"
+            >
+                <FaLinkedin className="text-xl" />
+                <span>LinkedIn</span>
+            </Link>
+        )}
+    </div>
+</div>
+</div>
 
                         {/* Social Icons */}
                         {/* <div className="flex justify-center gap-6 mt-6">

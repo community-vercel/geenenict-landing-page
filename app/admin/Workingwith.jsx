@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 const Workingwith = () => {
   const [image, setImage] = useState(""); // Base64 image
+  const [link, setLink] = useState(""); // Link for the client
   const [clients, setClients] = useState([]); // List of clients
   const [loading, setLoading] = useState(false); // Loading state
   const [selectedId, setSelectedId] = useState(null); // ID of the client being edited
@@ -39,7 +40,7 @@ const Workingwith = () => {
       const data = await response.json();
       setClients(data);
     } catch (error) {
-      console.error("Error fetching clients:", error);
+      console.error("Error fetching Certficates:", error);
     } finally {
       setLoading(false);
     }
@@ -72,19 +73,20 @@ const Workingwith = () => {
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image }), // Send Base64 image in the request body
+        body: JSON.stringify({ image, link }), // Send Base64 image and link in the request body
       });
 
       if (response.ok) {
         setImage(""); // Clear the image input
+        setLink(""); // Clear the link input
         setSelectedId(null); // Reset selected ID
         fetchClients(); // Refresh the list of clients
-        setFormMessage({ type: "success", text: selectedId ? "Client updated!" : "Client added!" });
+        setFormMessage({ type: "success", text: selectedId ? "Certificate updated!" : "Certificate added!" });
       } else {
-        setFormMessage({ type: "error", text: "Failed to save client" });
+        setFormMessage({ type: "error", text: "Failed to save Certificate" });
       }
     } catch (error) {
-      setFormMessage({ type: "error", text: "Error saving client" });
+      setFormMessage({ type: "error", text: "Error saving Certificate" });
     } finally {
       setLoading(false);
     }
@@ -94,6 +96,7 @@ const Workingwith = () => {
   const handleEdit = (client) => {
     setSelectedId(client._id); // Set the ID of the client being edited
     setImage(client.image); // Populate the image input with the existing image
+    setLink(client.link); // Populate the link input with the existing link
 
     // Scroll to the form
     if (formRef.current) {
@@ -111,12 +114,12 @@ const Workingwith = () => {
 
       if (response.ok) {
         fetchClients(); // Refresh the list of clients
-        setDeleteMessage({ type: "success", text: "Client deleted!" });
+        setDeleteMessage({ type: "success", text: "Certificate deleted!" });
       } else {
-        setDeleteMessage({ type: "error", text: "Failed to delete client" });
+        setDeleteMessage({ type: "error", text: "Failed to delete Certificate" });
       }
     } catch (error) {
-      setDeleteMessage({ type: "error", text: "Error deleting client" });
+      setDeleteMessage({ type: "error", text: "Error deleting Certificate" });
     } finally {
       setLoading(false);
     }
@@ -124,7 +127,7 @@ const Workingwith = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <h1 className="text-2xl font-semibold mb-6 text-center text-gray-800">Collaboration With</h1>
+      <h1 className="text-2xl font-semibold mb-6 text-center text-gray-800">Certified</h1>
 
       {/* Image Upload Form */}
       <form onSubmit={handleSubmit} className="space-y-6" ref={formRef}>
@@ -140,7 +143,7 @@ const Workingwith = () => {
         )}
 
         <div>
-          <label className="block text-gray-700 font-medium mb-2">Upload Image</label>
+          <label className="block text-gray-700 font-medium mb-2">Upload Certificate Image</label>
           <input
             type="file"
             accept="image/*"
@@ -154,6 +157,17 @@ const Workingwith = () => {
               className="mt-4 w-full h-40 object-cover rounded-lg"
             />
           )}
+        </div>
+
+        <div>
+          <label className="block text-gray-700 font-medium mb-2">Certificate Link</label>
+          <input
+            type="text"
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="Enter link"
+          />
         </div>
 
         <button
@@ -188,13 +202,13 @@ const Workingwith = () => {
           ) : selectedId ? (
             "Update Client"
           ) : (
-            "Add Client"
+            "Add Certificate"
           )}
         </button>
       </form>
 
       {/* Display Clients */}
-      <h2 className="text-xl font-semibold mt-8 mb-4 text-gray-800">Collab List</h2>
+      <h2 className="text-xl font-semibold mt-8 mb-4 text-gray-800">Certificate List</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {clients.map((client) => (
           <div
@@ -207,6 +221,16 @@ const Workingwith = () => {
                 alt="Client"
                 className="w-full h-40 object-cover rounded-lg"
               />
+            )}
+            {client.link && (
+              <a
+                href={client.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 text-blue-500 hover:underline"
+              >
+                Visit Link
+              </a>
             )}
             <div className="mt-4 flex space-x-2">
               <button

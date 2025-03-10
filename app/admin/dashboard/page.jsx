@@ -89,8 +89,8 @@ const Dashboard = () => {
     Contact: <ContactSection />,
     Projects: <ProjectLists />,
     Footer: <Footer />,
-    collaboration: <Workingwith />,
-    Requests: <Requests />,
+    Certified: <Workingwith />,
+        Requests: <Requests />,
     SEO: <MetaData />,
     "SMTP Setup": <SMTPSetup />,
   };
