@@ -60,10 +60,10 @@ const HeroAndAbout = () => {
 
   // Submit or update data
   const handleSubmit = async () => {
-    if (!header || !title || !subtitle || !subsubtitle || !description || !whoIAm || !expertise) {
-      setMessage({ text: "All fields are required!", type: "error" });
-      return;
-    }
+    // if (!header || !title || !subtitle || !subsubtitle || !description || !whoIAm || !expertise) {
+    //   setMessage({ text: "All fields are required!", type: "error" });
+    //   return;
+    // }
   
     const formData = new FormData();
     formData.append("header", header);
