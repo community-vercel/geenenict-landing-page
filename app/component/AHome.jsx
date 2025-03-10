@@ -9,7 +9,7 @@ import { MdEmail } from 'react-icons/md';
 import { BsPhoneFill } from 'react-icons/bs';
 
 export default function Home({ homeDetail }) {
-
+console.log(homeDetail)
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -157,7 +157,7 @@ export default function Home({ homeDetail }) {
                     </div>
 
                     <Link
-                        href="#contactss"
+                        href="#contact"
                         className="bg-[#0063ad] text-white text-sm font-semibold px-5 py-3 rounded-md shadow-md hover:bg-[#040414] transition mt-3 xs:mt-5 sm:mt-4 lg:mt-0 md:mt-0 mx-auto md:ml-auto md:mr-0 "
                     >
                         {homeDetail?.homeDetail[0].buttonText}
@@ -195,7 +195,7 @@ export default function Home({ homeDetail }) {
                     {/* Name and Subtitle */}
                     <H2 className="text-2xl md:text-3xl font-semibold text-[#0464af] mt-8 animate-fade-in">
                         {homeDetail && homeDetail ? homeDetail?.sliders[0].subtitle : 'Welcome to Digidaal'}   </H2>
-                        <Link href="#contactss">
+                        <Link href="#contact">
                         <H3 className="italic text-gray-600 text-3xl font-semibold transform transition-all duration-300 hover:scale-105 hover:text-[#0464af] relative group">
   <span className="relative z-10">
     {homeDetail && homeDetail?.sliders[0]?.subsubtitle 
@@ -379,7 +379,7 @@ export default function Home({ homeDetail }) {
                                 {/* <img src={`data:image/png;base64,${homeDetail?.contact[0].image}`} alt="Hero Section"   className="rounded-full object-cover w-full h-full" /> */}
 
                                 <Image
-                                src={`data:image/png;base64,${homeDetail?.contact[0].image}`}
+                                src={`${homeDetail?.contact[0].image}`}
 
                                     // src={serverurl.replace('/api', '') + homeDetail?.contact[0].image}
                                     alt="Brayner Daal"
@@ -400,7 +400,7 @@ export default function Home({ homeDetail }) {
                         </h2>
 
                         {/* Form */}
-                        <form onSubmit={handleSubmit} className="mt-8" id="contactss">
+                        <form onSubmit={handleSubmit} className="mt-8" id="contact">
                             {/* Name Fields */}
                             <div className="text-left mb-5">
                                 <label className="text-gray-700 text-sm font-semibold">
