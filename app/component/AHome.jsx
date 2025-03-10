@@ -4,13 +4,12 @@ import Image from "next/image";
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { H1, H2, H3, H4, H5 } from './Typrography';
-import { FaLinkedin } from 'react-icons/fa';
+import { FaLinkedin, FaQuoteLeft } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { BsPhoneFill } from 'react-icons/bs';
 
 export default function Home({ homeDetail }) {
 
-    console.log("homeDetail", homeDetail);
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -196,8 +195,19 @@ export default function Home({ homeDetail }) {
                     {/* Name and Subtitle */}
                     <H2 className="text-2xl md:text-3xl font-semibold text-[#0464af] mt-8 animate-fade-in">
                         {homeDetail && homeDetail ? homeDetail?.sliders[0].subtitle : 'Welcome to Digidaal'}   </H2>
-                    <H3 className="italic text-gray-600 text-3xl font-semibold">{homeDetail && homeDetail ? homeDetail?.sliders[0].subsubtitle : 'Nice to meet you!'}          </H3>
-                </section>
+                        <Link href="#contactss">
+                        <H3 className="italic text-gray-600 text-3xl font-semibold transform transition-all duration-300 hover:scale-105 hover:text-[#0464af] relative group">
+  <span className="relative z-10">
+    {homeDetail && homeDetail?.sliders[0]?.subsubtitle 
+      ? `“ ${homeDetail.sliders[0].subsubtitle} ”`
+      : '"Nice to meet you!"'}
+  </span>
+  
+  <span className="absolute inset-0 border-b-2 border-transparent transition-all duration-300"></span>
+
+  <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+</H3>
+</Link>          </section>
 
                 <section className="bg-[#041c5c] text-white mb-6 min-h-[50vh]">  {/* Use a fixed min-height */}
                     <div className="container max-w-full w-full mx-auto text-center py-7 px-6 bg-[#041c5c] rounded-2xl shadow-lg">
@@ -369,8 +379,10 @@ export default function Home({ homeDetail }) {
                                 {/* <img src={`data:image/png;base64,${homeDetail?.contact[0].image}`} alt="Hero Section"   className="rounded-full object-cover w-full h-full" /> */}
 
                                 <Image
-                                    src={serverurl.replace('/api', '') + homeDetail?.contact[0].image}
-                                    alt="Frans Geenen"
+                                src={`data:image/png;base64,${homeDetail?.contact[0].image}`}
+
+                                    // src={serverurl.replace('/api', '') + homeDetail?.contact[0].image}
+                                    alt="Brayner Daal"
                                     width={1000}
                                     height={1000}
                                     loading="lazy"
