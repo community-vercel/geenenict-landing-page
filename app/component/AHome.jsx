@@ -1,15 +1,13 @@
 'use client';
-import Head from 'next/head';
 import Image from "next/image";
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { H1, H2, H3, H4, H5 } from './Typrography';
-import { FaLinkedin, FaQuoteLeft } from 'react-icons/fa';
+import { H1, H2, H3, H4 } from './Typrography';
+import { FaLinkedin } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { BsPhoneFill } from 'react-icons/bs';
 
 export default function Home({ homeDetail }) {
-console.log(homeDetail)
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -136,7 +134,7 @@ console.log(homeDetail)
                                 <Image
 
                                     src={`${homeDetail?.homeDetail[0].logo}`}
-                                    alt="Frans Geenen"
+                                    alt="DigiDaal"
                                     width={56}
                                     height={56}
                                     priority
@@ -165,10 +163,10 @@ console.log(homeDetail)
                 </header>
                 <section className="flex flex-col items-center text-center py-24 bg-gradient-to-b from-gray-200 to-white">
                     {/* Title */}
-                   
+
                     <H1
-  className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-700 mt-2 w-full  max-w-6xl leading-tight"
-  dangerouslySetInnerHTML={{ __html: sanitizedHTML || "Your Specialist in Cloud Security & Application Management" }} />
+                        className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-700 mt-2 w-full  max-w-6xl leading-tight"
+                        dangerouslySetInnerHTML={{ __html: sanitizedHTML || "Your Specialist in Cloud Security & Application Management" }} />
 
 
                     {/* Avatar Image with Glow Effect */}
@@ -176,11 +174,12 @@ console.log(homeDetail)
                         <div className="w-80 h-80 md:w-72 md:h-72 rounded-full ">
                             <Image
 
-                                                                    src={`data:image/png;base64,${homeDetail?.sliders[0].image}`}
+                                src={`data:image/png;base64,${homeDetail?.sliders[0].image}`}
                                 alt={homeDetail?.sliders[0].subtitle}
                                 width={400}
                                 height={400}
-                                priority
+                                priority={true}
+                                quality={85}
                                 className="rounded-full object-cover w-full h-full"
                             />
                         </div>
@@ -195,19 +194,19 @@ console.log(homeDetail)
                     {/* Name and Subtitle */}
                     <H2 className="text-2xl md:text-3xl font-semibold text-[#0464af] mt-8 animate-fade-in">
                         {homeDetail && homeDetail ? homeDetail?.sliders[0].subtitle : 'Welcome to Digidaal'}   </H2>
-                        <Link href="#contact">
+                    <Link href="#contact">
                         <H3 className="italic text-gray-600 text-3xl font-semibold transform transition-all duration-300 hover:scale-105 hover:text-[#0464af] relative group">
-  <span className="relative z-10">
-    {homeDetail && homeDetail?.sliders[0]?.subsubtitle 
-      ? ` ${homeDetail.sliders[0].subsubtitle} `
-      : '"Nice to meet you!'}
-  </span>
-  
-  <span className="absolute inset-0 border-b-2 border-transparent transition-all duration-300"></span>
+                            <span className="relative z-10">
+                                {homeDetail && homeDetail?.sliders[0]?.subsubtitle
+                                    ? ` ${homeDetail.sliders[0].subsubtitle} `
+                                    : '"Nice to meet you!'}
+                            </span>
 
-  <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-</H3>
-</Link>          </section>
+                            <span className="absolute inset-0 border-b-2 border-transparent transition-all duration-300"></span>
+
+                            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                        </H3>
+                    </Link>          </section>
 
                 <section className="bg-[#041c5c] text-white mb-6 min-h-[50vh]">  {/* Use a fixed min-height */}
                     <div className="container max-w-full w-full mx-auto text-center py-7 px-6 bg-[#041c5c] rounded-2xl shadow-lg">
@@ -293,7 +292,7 @@ console.log(homeDetail)
                     <div className="max-w-6xl mx-auto text-center px-6">
                         {/* Heading */}
                         <H4 className="text-2xl font-extrabold text-gray-700 tracking-wide">
-                        Companies I’m Certified By:
+                            Companies I’m Certified By:
                         </H4>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-5 sm:mt-5 px-6">
                             {homeDetail?.certificate.map((certificate, index) => (
@@ -301,18 +300,18 @@ console.log(homeDetail)
                                     key={index}
                                     className="transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-[#0460a3] hover:text-white p-6 bg-white rounded-lg group"
                                 >
-                                    <Link href={certificate?.link}  target={certificate.link!=''?"_blank":''} rel="noopener noreferrer">
-                                    {/* Certificate Image */}
-                                    <div className="flex-shrink-0">
-                                        <Image
-                                            src={certificate?.image} // Assuming the certificate has an imageUrl field
-                                            alt="certificates"
-                                            width={150} // Set width of 150px
-                                            height={150} // Set height of 150px
-                                            loading="lazy"
-                                            className="w-full max-h-72 object-contain transition-transform duration-300 ease-in-out transform hover:scale-110"
-                                        />
-                                    </div>
+                                    <Link href={certificate?.link} target={certificate.link != '' ? "_blank" : ''} rel="noopener noreferrer">
+                                        {/* Certificate Image */}
+                                        <div className="flex-shrink-0">
+                                            <Image
+                                                src={certificate?.image} // Assuming the certificate has an imageUrl field
+                                                alt="certificates"
+                                                width={150} // Set width of 150px
+                                                height={150} // Set height of 150px
+                                                loading="lazy"
+                                                className="w-full max-h-72 object-contain transition-transform duration-300 ease-in-out transform hover:scale-110"
+                                            />
+                                        </div>
                                     </Link>
                                     {/* Certificate Title */}
                                     <strong className="text-lg text-orange-500 mt-4 block group-hover:text-white">
@@ -379,7 +378,7 @@ console.log(homeDetail)
                                 {/* <img src={`data:image/png;base64,${homeDetail?.contact[0].image}`} alt="Hero Section"   className="rounded-full object-cover w-full h-full" /> */}
 
                                 <Image
-                                src={`${homeDetail?.contact[0].image}`}
+                                    src={`${homeDetail?.contact[0].image}`}
 
                                     // src={serverurl.replace('/api', '') + homeDetail?.contact[0].image}
                                     alt="Brayner Daal"
@@ -499,47 +498,47 @@ console.log(homeDetail)
 
                         {/* Contact Info */}
                         <div className="mt-6 text-gray-300 text-sm text-center flex flex-col items-center space-y-3">
-    {homeDetail?.footer?.data?.subtitle && (
-        <p><strong>{homeDetail.footer.data.subtitle}</strong></p>
-    )}
+                            {homeDetail?.footer?.data?.subtitle && (
+                                <p><strong>{homeDetail.footer.data.subtitle}</strong></p>
+                            )}
 
-<div className="flex flex-col items-center space-y-3">
+                            <div className="flex flex-col items-center space-y-3">
 
-    <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-6 space-y-3 sm:space-y-0">
-        {homeDetail?.footer?.data?.email && (
-            <Link 
-                href={`mailto:${homeDetail.footer.data.email}`} 
-                className="flex items-center space-x-2 text-white hover:text-blue-400 transition duration-300"
-            >
-                <MdEmail className="text-xl" />
-                <span>{homeDetail.footer.data.email}</span>
-            </Link>
-        )}
+                                <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-6 space-y-3 sm:space-y-0">
+                                    {homeDetail?.footer?.data?.email && (
+                                        <Link
+                                            href={`mailto:${homeDetail.footer.data.email}`}
+                                            className="flex items-center space-x-2 text-white hover:text-blue-400 transition duration-300"
+                                        >
+                                            <MdEmail className="text-xl" />
+                                            <span>{homeDetail.footer.data.email}</span>
+                                        </Link>
+                                    )}
 
-        {homeDetail?.footer?.data?.phone && (
-            <Link 
-                href={`tel:${homeDetail.footer.data.phone}`} 
-                className="flex items-center space-x-2 text-white hover:text-green-400 transition duration-300"
-            >
-                <BsPhoneFill className="text-xl" />
-                <span>{homeDetail.footer.data.phone}</span>
-            </Link>
-        )}
+                                    {homeDetail?.footer?.data?.phone && (
+                                        <Link
+                                            href={`tel:${homeDetail.footer.data.phone}`}
+                                            className="flex items-center space-x-2 text-white hover:text-green-400 transition duration-300"
+                                        >
+                                            <BsPhoneFill className="text-xl" />
+                                            <span>{homeDetail.footer.data.phone}</span>
+                                        </Link>
+                                    )}
 
-        {homeDetail?.footer?.data?.linkedin && (
-            <Link 
-                href={homeDetail.footer.data.linkedin} 
-                rel="noopener noreferrer" 
-                target="_blank" 
-                className="flex items-center space-x-2 text-white hover:text-blue-500 transition duration-300"
-            >
-                <FaLinkedin className="text-xl" />
-                <span>LinkedIn</span>
-            </Link>
-        )}
-    </div>
-</div>
-</div>
+                                    {homeDetail?.footer?.data?.linkedin && (
+                                        <Link
+                                            href={homeDetail.footer.data.linkedin}
+                                            rel="noopener noreferrer"
+                                            target="_blank"
+                                            className="flex items-center space-x-2 text-white hover:text-blue-500 transition duration-300"
+                                        >
+                                            <FaLinkedin className="text-xl" />
+                                            <span>LinkedIn</span>
+                                        </Link>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
 
                         {/* Social Icons */}
                         {/* <div className="flex justify-center gap-6 mt-6">
